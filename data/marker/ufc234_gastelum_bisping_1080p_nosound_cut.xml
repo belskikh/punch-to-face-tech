@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="utf-8"?>
+<annotations>
+  <version>1.1</version>
+  <meta>
+    <task>
+      <id>11</id>
+      <name>ufc234_gastelum_bisping_1080p_nosound_cut</name>
+      <size>7042</size>
+      <mode>interpolation</mode>
+      <overlap>5</overlap>
+      <bugtracker></bugtracker>
+      <flipped>False</flipped>
+      <created>2019-03-28 17:25:38.496433+03:00</created>
+      <updated>2019-03-29 18:16:51.791388+03:00</updated>
+      <source>ptf/ufc234_gastelum_bisping_1080p_nosound_cut.mp4</source>
+      <labels>
+        <label>
+          <name>marker</name>
+          <attributes>
+            <attribute>@number=id:0,10000,1</attribute>
+          </attributes>
+        </label>
+      </labels>
+      <segments>
+        <segment>
+          <id>10</id>
+          <start>0</start>
+          <stop>7041</stop>
+          <url>http://78.107.254.103:8895/?id=10</url>
+        </segment>
+      </segments>
+      <owner>
+        <username>poxyu</username>
+        <email>spiridonov.andre@gmail.com</email>
+      </owner>
+      <original_size>
+        <width>1920</width>
+        <height>1080</height>
+      </original_size>
+    </task>
+    <dumped>2019-03-29 18:19:28.552524+03:00</dumped>
+  </meta>
+  <track id="1" label="marker">
+    <points frame="0" points="1088.86,437.74" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="1" points="1088.86,437.74" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="0" label="marker">
+    <points frame="0" points="794.60,437.60" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="1" points="794.60,437.60" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="2" label="marker">
+    <points frame="0" points="1373.03,504.89" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="1" points="1373.03,504.89" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+  <track id="3" label="marker">
+    <points frame="0" points="1581.02,672.44" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+    <points frame="1" points="1581.02,672.44" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+  </track>
+  <track id="4" label="marker">
+    <points frame="0" points="1362.21,967.42" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+    <points frame="1" points="1362.21,967.42" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+  </track>
+  <track id="6" label="marker">
+    <points frame="0" points="487.95,975.15" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+    <points frame="1" points="487.95,975.15" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+  </track>
+  <track id="7" label="marker">
+    <points frame="0" points="276.89,674.00" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+    <points frame="1" points="276.89,674.00" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+  </track>
+  <track id="8" label="marker">
+    <points frame="0" points="506.62,502.27" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="1" points="506.62,502.27" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="9" label="marker">
+    <points frame="150" points="783.89,429.77" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="151" points="783.89,429.77" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="10" label="marker">
+    <points frame="150" points="1081.17,430.86" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="151" points="1081.17,430.86" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="11" label="marker">
+    <points frame="150" points="1360.32,497.30" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="151" points="1360.32,497.30" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+  <track id="12" label="marker">
+    <points frame="150" points="1568.28,664.48" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+    <points frame="151" points="1568.28,664.48" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+  </track>
+  <track id="13" label="marker">
+    <points frame="150" points="1349.87,959.08" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+    <points frame="151" points="1349.87,959.08" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+  </track>
+  <track id="14" label="marker">
+    <points frame="150" points="474.48,971.09" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+    <points frame="151" points="474.48,971.09" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+  </track>
+  <track id="15" label="marker">
+    <points frame="150" points="260.57,669.53" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+    <points frame="151" points="260.57,669.53" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+  </track>
+  <track id="16" label="marker">
+    <points frame="150" points="493.66,495.30" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="151" points="493.66,495.30" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="17" label="marker">
+    <points frame="200" points="764.03,457.95" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="201" points="764.03,457.95" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="18" label="marker">
+    <points frame="200" points="1089.17,457.37" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="201" points="1089.17,457.37" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="19" label="marker">
+    <points frame="200" points="1399.84,527.77" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="201" points="1399.84,527.77" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+  <track id="20" label="marker">
+    <points frame="200" points="1638.84,713.61" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+    <points frame="201" points="1638.84,713.61" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+  </track>
+  <track id="21" label="marker">
+    <points frame="200" points="1399.80,1051.52" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+    <points frame="201" points="1399.80,1051.52" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+  </track>
+  <track id="22" label="marker">
+    <points frame="200" points="407.19,1075.18" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+    <points frame="201" points="407.19,1075.18" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+  </track>
+  <track id="23" label="marker">
+    <points frame="200" points="167.10,730.57" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+    <points frame="201" points="167.10,730.57" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+  </track>
+  <track id="24" label="marker">
+    <points frame="200" points="436.14,532.79" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="201" points="436.14,532.79" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="79" label="marker">
+    <points frame="225" points="1469.39,562.42" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="226" points="1469.39,562.42" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+  <track id="81" label="marker">
+    <points frame="225" points="40.91,803.07" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+    <points frame="226" points="40.91,803.07" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+  </track>
+  <track id="82" label="marker">
+    <points frame="225" points="366.96,569.53" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="226" points="366.96,569.53" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="78" label="marker">
+    <points frame="225" points="1107.28,482.73" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="226" points="1107.28,482.73" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="80" label="marker">
+    <points frame="225" points="1756.38,778.31" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+    <points frame="226" points="1756.38,778.31" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+  </track>
+  <track id="26" label="marker">
+    <points frame="250" points="1196.66,533.21" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="251" points="1196.66,533.21" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="25" label="marker">
+    <points frame="250" points="737.04,534.47" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="251" points="737.04,534.47" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="27" label="marker">
+    <points frame="250" points="1657.84,635.96" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="251" points="1657.84,635.96" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+  <track id="28" label="marker">
+    <points frame="250" points="266.99,639.76" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="251" points="266.99,639.76" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="32" label="marker">
+    <points frame="450" points="186.90,633.12" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="451" points="186.90,633.12" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="29" label="marker">
+    <points frame="450" points="710.70,515.35" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="451" points="710.70,515.35" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="30" label="marker">
+    <points frame="450" points="1217.95,513.56" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="451" points="1217.95,513.56" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="31" label="marker">
+    <points frame="450" points="1737.25,626.92" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="451" points="1737.25,626.92" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+  <track id="87" label="marker">
+    <points frame="640" points="274.85,545.20" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="641" points="274.85,545.20" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="86" label="marker">
+    <points frame="640" points="1321.47,1029.62" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+    <points frame="641" points="1321.47,1029.62" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+  </track>
+  <track id="85" label="marker">
+    <points frame="640" points="1302.35,494.76" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="641" points="1302.35,494.76" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+  <track id="84" label="marker">
+    <points frame="640" points="981.06,433.74" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="641" points="981.06,433.74" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="83" label="marker">
+    <points frame="640" points="640.07,448.81" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="641" points="640.07,448.81" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="33" label="marker">
+    <points frame="650" points="487.88,463.60" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="651" points="487.88,463.60" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="37" label="marker">
+    <points frame="650" points="65.45,582.28" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="651" points="65.45,582.28" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="36" label="marker">
+    <points frame="650" points="1226.60,1038.70" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+    <points frame="651" points="1226.60,1038.70" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+  </track>
+  <track id="35" label="marker">
+    <points frame="650" points="1192.71,491.04" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="651" points="1192.71,491.04" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+  <track id="34" label="marker">
+    <points frame="650" points="861.67,437.50" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="651" points="861.67,437.50" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="38" label="marker">
+    <points frame="700" points="479.80,434.70" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="701" points="479.80,434.70" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="39" label="marker">
+    <points frame="700" points="868.76,459.83" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="701" points="868.76,459.83" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+  <track id="40" label="marker">
+    <points frame="700" points="1136.09,613.50" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+    <points frame="701" points="1136.09,613.50" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+  </track>
+  <track id="41" label="marker">
+    <points frame="700" points="973.74,1041.22" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+    <points frame="701" points="973.74,1041.22" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+  </track>
+  <track id="91" label="marker">
+    <points frame="790" points="169.70,528.90" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="791" points="169.70,528.90" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="88" label="marker">
+    <points frame="790" points="556.21,415.63" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="791" points="556.21,415.63" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="89" label="marker">
+    <points frame="790" points="1238.93,440.72" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="791" points="1238.93,440.72" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+  <track id="90" label="marker">
+    <points frame="790" points="1483.06,607.20" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+    <points frame="791" points="1483.06,607.20" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+  </track>
+  <track id="47" label="marker">
+    <points frame="810" points="677.50,889.84" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+    <points frame="811" points="677.50,889.84" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+  </track>
+  <track id="48" label="marker">
+    <points frame="810" points="492.61,591.67" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+    <points frame="811" points="492.61,591.67" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+  </track>
+  <track id="49" label="marker">
+    <points frame="810" points="696.81,437.90" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="811" points="696.81,437.90" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="43" label="marker">
+    <points frame="810" points="1278.79,393.26" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="811" points="1278.79,393.26" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="44" label="marker">
+    <points frame="810" points="1589.90,475.78" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="811" points="1589.90,475.78" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+  <track id="45" label="marker">
+    <points frame="810" points="1842.18,676.16" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+    <points frame="811" points="1842.18,676.16" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+  </track>
+  <track id="46" label="marker">
+    <points frame="810" points="1570.60,976.00" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+    <points frame="811" points="1570.60,976.00" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">4</attribute>
+    </points>
+  </track>
+  <track id="42" label="marker">
+    <points frame="810" points="975.10,382.78" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="811" points="975.10,382.78" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="95" label="marker">
+    <points frame="850" points="918.48,417.01" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="851" points="918.48,417.01" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="94" label="marker">
+    <points frame="850" points="710.61,554.26" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+    <points frame="851" points="710.61,554.26" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+  </track>
+  <track id="93" label="marker">
+    <points frame="850" points="862.07,870.23" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+    <points frame="851" points="862.07,870.23" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+  </track>
+  <track id="92" label="marker">
+    <points frame="850" points="1549.37,409.25" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="851" points="1549.37,409.25" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="50" label="marker">
+    <points frame="890" points="1206.28,383.96" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="891" points="1206.28,383.96" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="52" label="marker">
+    <points frame="890" points="831.70,917.00" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+    <points frame="891" points="831.70,917.00" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+  </track>
+  <track id="53" label="marker">
+    <points frame="890" points="894.94,427.77" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="891" points="894.94,427.77" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="51" label="marker">
+    <points frame="890" points="1563.49,411.35" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="891" points="1563.49,411.35" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="55" label="marker">
+    <points frame="930" points="1807.50,498.20" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="931" points="1807.50,498.20" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="57" label="marker">
+    <points frame="930" points="961.74,509.60" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="931" points="961.74,509.60" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="54" label="marker">
+    <points frame="930" points="1342.96,459.87" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="931" points="1342.96,459.87" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="56" label="marker">
+    <points frame="930" points="693.30,685.50" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+    <points frame="931" points="693.30,685.50" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+  </track>
+  <track id="97" label="marker">
+    <points frame="2260" points="1641.31,535.59" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="2261" points="1641.31,535.59" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="99" label="marker">
+    <points frame="2260" points="519.28,602.74" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="2261" points="519.28,602.74" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="98" label="marker">
+    <points frame="2260" points="83.20,901.70" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+    <points frame="2261" points="83.20,901.70" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+  </track>
+  <track id="96" label="marker">
+    <points frame="2260" points="1051.62,509.54" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="2261" points="1051.62,509.54" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="58" label="marker">
+    <points frame="2310" points="1143.57,560.08" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="2311" points="1143.57,560.08" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="59" label="marker">
+    <points frame="2310" points="1755.70,592.96" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="2311" points="1755.70,592.96" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="60" label="marker">
+    <points frame="2310" points="156.80,958.13" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+    <points frame="2311" points="156.80,958.13" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+  </track>
+  <track id="61" label="marker">
+    <points frame="2310" points="593.86,653.97" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="2311" points="593.86,653.97" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="64" label="marker">
+    <points frame="2870" points="704.55,529.93" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+    <points frame="2871" points="704.55,529.93" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+  </track>
+  <track id="63" label="marker">
+    <points frame="2870" points="93.42,524.75" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+    <points frame="2871" points="93.42,524.75" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+  </track>
+  <track id="62" label="marker">
+    <points frame="2870" points="1272.36,1060.44" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="2871" points="1272.36,1060.44" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="65" label="marker">
+    <points frame="2870" points="1164.85,671.30" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="2871" points="1164.85,671.30" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="101" label="marker">
+    <points frame="2875" points="106.22,520.23" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+    <points frame="2876" points="106.22,520.23" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">5</attribute>
+    </points>
+  </track>
+  <track id="100" label="marker">
+    <points frame="2875" points="1285.82,1054.56" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="2876" points="1285.82,1054.56" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="102" label="marker">
+    <points frame="2875" points="721.64,526.07" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+    <points frame="2876" points="721.64,526.07" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">6</attribute>
+    </points>
+  </track>
+  <track id="103" label="marker">
+    <points frame="2875" points="1177.46,665.90" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="2876" points="1177.46,665.90" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="73" label="marker">
+    <points frame="4105" points="1919.20,690.60" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+    <points frame="4106" points="1919.20,690.60" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">3</attribute>
+    </points>
+  </track>
+  <track id="70" label="marker">
+    <points frame="4105" points="398.73,519.55" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="4106" points="398.73,519.55" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="71" label="marker">
+    <points frame="4105" points="919.50,461.68" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="4106" points="919.50,461.68" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="72" label="marker">
+    <points frame="4105" points="1431.82,507.88" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="4106" points="1431.82,507.88" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+  <track id="66" label="marker">
+    <points frame="4141" points="527.44,558.18" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="4142" points="527.44,558.18" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="67" label="marker">
+    <points frame="4141" points="1024.03,509.82" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="4142" points="1024.03,509.82" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="68" label="marker">
+    <points frame="4141" points="1532.08,562.26" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="4142" points="1532.08,562.26" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+  <track id="69" label="marker">
+    <points frame="4141" points="37.12,748.47" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="4142" points="37.12,748.47" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="75" label="marker">
+    <points frame="4148" points="1018.32,520.34" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+    <points frame="4149" points="1018.32,520.34" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">1</attribute>
+    </points>
+  </track>
+  <track id="77" label="marker">
+    <points frame="4148" points="10.40,760.52" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+    <points frame="4149" points="10.40,760.52" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">7</attribute>
+    </points>
+  </track>
+  <track id="74" label="marker">
+    <points frame="4148" points="511.56,568.73" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+    <points frame="4149" points="511.56,568.73" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">0</attribute>
+    </points>
+  </track>
+  <track id="76" label="marker">
+    <points frame="4148" points="1534.49,575.73" outside="0" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+    <points frame="4149" points="1534.49,575.73" outside="1" occluded="0" keyframe="1">
+      <attribute name="id">2</attribute>
+    </points>
+  </track>
+</annotations>
