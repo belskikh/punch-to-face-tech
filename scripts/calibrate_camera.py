@@ -1,9 +1,11 @@
 import numpy as np
-from typing import Dict, Tuple, List
+import cv2
+from pathlib import Path
+from typing import Dict, Tuple, List, Union
 from parse_cvat_annotation import parse_cvat_xml, Annotation, Point
 
 
-# __all__ = ['parse_cvat_xml']
+__all__ = ['calibrate_camera']
 
 
 # aliases
@@ -33,8 +35,9 @@ class OctagonMarker:
         # угол поворота в радианах
         angle: float = np.deg2rad(-45.0)
         return np.array([
-            [np.cos(angle), np.sin(angle) * -1],
-            [np.sin(angle), np.cos(angle)]
+            [np.cos(angle), np.sin(angle) * -1, 0.0],
+            [np.sin(angle), np.cos(angle), 0.0],
+            [0.0, 0.0, 1.0]
         ]).T
 
     # инициализируем точки метки
@@ -46,7 +49,8 @@ class OctagonMarker:
         # first point, id=0
         x: float = self.center[0] - self.side / 2.0
         y: float = self.center[1] + self.height / 2.0
-        self.points[0] = np.array([[x, y]])
+        z: float = 0.0
+        self.points[0] = np.array([[x, y, z]])
         # поворачиваем на 45 градусов и получаем координаты следующих точек
         for pid in range(1, 8):
             self.points[pid] = self.points[pid-1].dot(self._rot_mat)
@@ -78,8 +82,8 @@ class CameraCalibration:
             points_in_2D.append([point.x, point.y])
             points_in_3D.append(marker_points_in_3D[point.id])
 
-        points_in_2D = np.array(points_in_2D, dtype=np.float32).reshape(-1, 2)
-        points_in_3D = np.array(points_in_3D, dtype=np.float32).reshape(-1, 2)
+        points_in_2D = np.array(points_in_2D, dtype=np.float32).reshape(-1, 1, 2)
+        points_in_3D = np.array(points_in_3D, dtype=np.float32).reshape(-1, 1, 3)
 
         return points_in_2D, points_in_3D
 
@@ -111,3 +115,14 @@ class CameraCalibration:
             None, None,
             flags=flags
         )
+
+# calibrate camera
+# default flags:
+# cv2.CALIB_FIX_PRINCIPAL_POINT | cv2.CALIB_FIX_ASPECT_RATIO
+def calibrate_camera(anno_fn: Union[str, Path], flags: int = 6):
+    anno = parse_cvat_xml(anno_fn)
+    marker = OctagonMarker()
+
+    camera_calib = CameraCalibration(anno, marker)
+
+    return camera_calib.calibrate(flags=flags)
