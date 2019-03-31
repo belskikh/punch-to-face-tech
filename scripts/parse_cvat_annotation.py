@@ -1,5 +1,5 @@
 from lxml import etree
-from typing import Union, Tuple
+from typing import Union, Tuple, Dict, List
 from pathlib import Path
 from collections import defaultdict
 
@@ -9,23 +9,21 @@ __all__ = ['parse_cvat_xml']
 
 class Point:
 
-    def __init__(self, point_id:int, coords:Tuple[float, float]):
-        self.id = point_id
-        self.x = coords[0]
-        self.y = coords[1]
+    def __init__(self, point_id: int, coords: Tuple[float, float]) -> None:
+        self.id: int = point_id
+        self.x: float = coords[0]
+        self.y: float = coords[1]
 
 
 class Annotation:
 
-    def __init__(self, filename:Path, width:int, height:int):
-        self.filename = filename
-        self.name = filename.stem
-        self.width = width
-        self.height = height
-        self.frames = defaultdict(list)
-
-    def add_point(self, frame_n:int, point:Point) -> None:
-        self.frames[frame_n].append(point)
+    def __init__(self, filename: Path, width: int, height: int) -> None:
+        self.filename: Path = filename
+        self.name: str = filename.stem
+        self.width: int = width
+        self.height: int = height
+        # frame number -> list of points
+        self.frames: Dict[int, List[Point]] = defaultdict(list)
 
     # должно быть минимум 4 точки в каждом кадре
     def _validate(self) -> None:
@@ -35,8 +33,14 @@ class Annotation:
                 frames[frame_n] = points
         self.frames = frames
 
+    def add_point(self, frame_n: int, point: Point) -> None:
+        self.frames[frame_n].append(point)
 
-def parse_cvat_xml(filename:Union[str,Path]) -> Annotation:
+    def get_frames(self) -> Dict[int, List[Point]]:
+        return self.frames
+
+
+def parse_cvat_xml(filename: Union[str, Path]) -> Annotation:
     filename = Path(filename)
     root = etree.parse(str(filename)).getroot()
 
