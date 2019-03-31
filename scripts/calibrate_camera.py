@@ -1,11 +1,17 @@
 import numpy as np
 import cv2
+from sys import float_info as flt_inf
 from pathlib import Path
 from typing import Dict, Tuple, List, Union
 from parse_cvat_annotation import parse_cvat_xml, Annotation, Point
 
 
-__all__ = ['calibrate_camera']
+__all__ = [
+    'parse_cvat_xml',
+    'calibrate_camera',
+    'OctagonMarker',
+    'CameraCalibration'
+]
 
 
 # aliases
@@ -107,22 +113,29 @@ class CameraCalibration:
     # calibrate camera
     # default flags:
     # cv2.CALIB_FIX_PRINCIPAL_POINT | cv2.CALIB_FIX_ASPECT_RATIO
-    def calibrate(self, flags: int = 6):
+    def calibrate(
+            self, flags: int = 6,
+            criteria: Tuple[int, int, float] = (3, 30, flt_inf.epsilon)
+        ):
         # ret, mtx, dist, rvecs, tvecs
         return cv2.calibrateCamera(
             self.obj_points, self.img_points,
             (self.anno.width, self.anno.height),
             None, None,
-            flags=flags
+            flags=flags,
+            criteria=criteria
         )
 
 # calibrate camera
 # default flags:
 # cv2.CALIB_FIX_PRINCIPAL_POINT | cv2.CALIB_FIX_ASPECT_RATIO
-def calibrate_camera(anno_fn: Union[str, Path], flags: int = 6):
+def calibrate_camera(
+        anno_fn: Union[str, Path], flags: int = 6,
+        criteria: Tuple[int, int, float] = (3, 30, flt_inf.epsilon)
+    ):
     anno = parse_cvat_xml(anno_fn)
     marker = OctagonMarker()
 
     camera_calib = CameraCalibration(anno, marker)
 
-    return camera_calib.calibrate(flags=flags)
+    return camera_calib.calibrate(flags=flags, criteria=criteria)
