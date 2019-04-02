@@ -139,8 +139,3 @@ class AlbuNet(nn.Module):
             x_out = self.final(dec0)
 
         return x_out
-
-
-
-
-
