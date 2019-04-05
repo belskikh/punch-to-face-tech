@@ -1,5 +1,4 @@
-import os
-import csv
+import numpy as np
 import cv2
 import torch
 import pandas as pd
@@ -25,15 +24,19 @@ class VehicleDataset(Dataset):
         targets = []
         image = cv2.imread(self.data_frame['image'][idx])
         car_mask = cv2.imread(self.data_frame['car'][idx], cv2.IMREAD_UNCHANGED)
-        bus_mask = cv2.imread(self.data_frame['bus'][idx], cv2.IMREAD_UNCHANGED)
         truck_mask = cv2.imread(self.data_frame['truck'][idx], cv2.IMREAD_UNCHANGED)
+        if pd.isnull(self.data_frame['bus'][idx]) == False:
+            bus_mask = cv2.imread(self.data_frame['bus'][idx], cv2.IMREAD_UNCHANGED)
+        else:
+            bus_mask = np.zeros([car_mask.shape[0], car_mask.shape[1]], dtype=np.float32)
         targets.append(image)
         targets.append(car_mask)
         targets.append(bus_mask)
         targets.append(truck_mask)
         if self.transforms:
             aug = transforms(targets)
-        targets = torch.stack([y_to_torch(aug['mask']), y_to_torch(aug['mask1']), y_to_torch(aug['mask2'])])
-        return {'features': x_to_torch(aug['image']), 'targets': targets}
+        masks = torch.stack([y_to_torch(aug['mask']), y_to_torch(aug['mask1']), y_to_torch(aug['mask2'])])
+
+        return {'features': x_to_torch(aug['image']), 'targets': np.squeeze(masks)}
 
 
