@@ -55,7 +55,7 @@ def make_overlay(
     output = img.copy()
     # overlay mask
     overlay = np.zeros_like(img)
-    overlay[:,:] = color
+    overlay[:, :] = color
     # inverse mask
     mask_inv = cv2.bitwise_not(mask)
     # black-out the area of mask
