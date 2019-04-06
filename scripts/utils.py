@@ -1,5 +1,8 @@
 import numpy as np
 import cv2
+import re
+import shutil
+import time
 from pathlib import Path
 from typing import Dict, Tuple, List, Union
 
@@ -13,7 +16,7 @@ def create_overlays(
         color: Tuple[int, int, int] = (89, 69, 15),
         alpha: float = 0.5,
         verbose: bool = True,
-        ignore_exceptions: bool = False):
+        ignore_errors: bool = False):
     # convert all paths to PosixPath
     root_dir = Path(root_dir)
     img_dir = Path(img_dir)
@@ -37,7 +40,7 @@ def create_overlays(
         mask_fn = mask_dir/fn.name
         mask = cv2.imread(str(mask_fn), cv2.IMREAD_GRAYSCALE)
         if mask is None:
-            if ignore_exceptions:
+            if ignore_errors:
                 continue
             else:
                 raise FileNotFoundError(mask_fn)
@@ -67,3 +70,31 @@ def make_overlay(
     # original img with overlay mask (alpha opacity)
     output = cv2.addWeighted(overlay, alpha, img, 1.0 - alpha, 0)
     return output
+
+
+def sort_frame_func(filename: Path):
+    matching_numbers = re.findall(r'\\d+', filename.stem)
+    num_matches = len(matching_numbers)
+    if num_matches == 0:
+        return -1
+    elif num_matches > 1:
+        raise ValueError(f'Incorrect filename = {filename}')
+    return int(matching_numbers[0])
+
+
+def make_ordered_directory(directory: Union[str, Path]):
+    res_dir = Path(directory)
+    directory = Path(directory)
+    millis = int(round(time.time() * 1000))
+    tmp_dir = directory.parent/f'{millis}_{directory.name}'
+    directory.replace(tmp_dir)
+    res_dir.mkdir()
+    files = sorted(tmp_dir.iterdir(), key=sort_frame_func)
+    file_n = 0
+    for fn in files:
+        if str.lower(fn.suffix) not in ['.png', '.jpg', '.jpeg']:
+            continue
+        new_fn = res_dir/f'{file_n}{fn.suffix}'
+        shutil.move(str(fn), str(new_fn))
+        file_n += 1
+    shutil.rmtree(str(tmp_dir), ignore_errors=True)
