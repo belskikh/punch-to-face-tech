@@ -7,12 +7,14 @@ from pathlib import Path
 from typing import Dict, Tuple, List, Union
 
 
+IMG_EXT = ['.png', '.jpg', '.jpeg']
+
+
 def create_overlays(
         root_dir: Union[str, Path],
         img_dir: Union[str, Path] = 'images',
         mask_dir: Union[str, Path] = 'masks',
         overlay_dir: Union[str, Path] = 'overlays',
-        img_ext: str = '.png',
         color: Tuple[int, int, int] = (89, 69, 15),
         alpha: float = 0.5,
         verbose: bool = True,
@@ -34,7 +36,7 @@ def create_overlays(
     overlay_dir.mkdir(parents=True, exist_ok=True)
     # iterate over image paths
     for fn in img_dir.iterdir():
-        if fn.suffix != img_ext:
+        if str.lower(fn.suffix) not in IMG_EXT:
             continue
         img = cv2.imread(str(fn), cv2.IMREAD_COLOR)
         mask_fn = mask_dir/fn.name
@@ -92,9 +94,22 @@ def make_ordered_directory(directory: Union[str, Path]):
     files = sorted(tmp_dir.iterdir(), key=sort_frame_func)
     file_n = 0
     for fn in files:
-        if str.lower(fn.suffix) not in ['.png', '.jpg', '.jpeg']:
+        if str.lower(fn.suffix) not in IMG_EXT:
             continue
         new_fn = res_dir/f'{file_n}{fn.suffix}'
         shutil.move(str(fn), str(new_fn))
         file_n += 1
     shutil.rmtree(str(tmp_dir), ignore_errors=True)
+
+
+def remove_redundant_channels(directory: Union[str, Path]):
+    directory = Path(directory)
+    files = directory.iterdir()
+    for fn in files:
+        if str.lower(fn.suffix) not in IMG_EXT:
+            continue
+        mask = cv2.imread(str(fn), -1)
+        if len(mask.shape) < 3:
+            continue
+        mask = mask[:, :, 0]
+        ret = cv2.imwrite(str(fn), mask)
