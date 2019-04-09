@@ -8,3 +8,6 @@ https://cloud.mail.ru/public/51EA/vvGk1W6XF
 
 ### Test camera calibration marker points (data/marker)
 https://cloud.mail.ru/public/8dFs/9XCcPe1wx
+
+### Canvas segmentation dataset
+https://cloud.mail.ru/public/5FKM/5sgPe98Nz
