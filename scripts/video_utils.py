@@ -11,14 +11,14 @@ class VideoInfo:
         self.__video_info: Dict = data
 
     @classmethod
-    def load_from_file(cls, filename: Union[str, Path]) -> VideoInfo:
+    def load_from_file(cls, filename: Union[str, Path]):
         filename = str(filename)
         with open(filename) as json_file:
             data = json.load(json_file)
         return cls(data)
 
     @classmethod
-    def create_from_data(cls, data: Dict) -> VideoInfo:
+    def create_from_data(cls, data: Dict):
         return cls(data)
 
     def __check_data(self):
