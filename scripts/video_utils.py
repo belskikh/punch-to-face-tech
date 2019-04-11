@@ -24,6 +24,9 @@ class VideoInfo:
     def __check_data(self):
         assert self.__video_info is not None, 'No video info data was loaded!'
 
+    def get_data(self) -> Dict:
+        return self.__video_info
+
     def get_fps(self) -> float:
         self.__check_data()
         fps = eval(self.__video_info['streams'][0]['r_frame_rate'])
@@ -83,7 +86,7 @@ def extract_frames(
 
 def get_video_info(
         filename: Union[str, Path],
-        verbose: bool = True) -> Dict:
+        verbose: bool = True) -> VideoInfo:
     src_path = str(filename)
     # input options
     input_opts = [
