@@ -99,4 +99,4 @@ def get_video_info(
     if verbose:
         print(f'ffprobe cmd: {ff.cmd}')
     stdout, stderr = ff.run(stdout=subprocess.PIPE)
-    return json.loads(stdout)
+    return VideoInfo.create_from_data(json.loads(stdout))
