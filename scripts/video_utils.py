@@ -39,6 +39,31 @@ class VideoFrame:
         return self.__data
 
 
+class VideoScene:
+
+    def __init__(self, id: int, first_frame: int, last_frame: int) -> None:
+        self.id = id
+        self.first_frame = first_frame
+        self.last_frame = last_frame
+
+    def get_id(self) -> int:
+        return self.id
+
+    def get_first_frame(self) -> int:
+        return self.first_frame
+
+    def get_last_frame(self) -> int:
+        return self.last_frame
+
+    def get_num_frames(self) -> int:
+        return self.last_frame - self.first_frame + 1
+
+    def contains(self, frame_n: int):
+        flag = frame_n >= self.first_frame
+        flag = flag and frame_n <= self.last_frame
+        return flag
+
+
 class VideoInfo:
 
     def __init__(
@@ -60,6 +85,8 @@ class VideoInfo:
         self.frames = self.__init_frames(self.__frame_arr)
         # convert json frame timestamps to List[int]
         self.scene_frame_ts = self.__init_scene_frame_ts(self.__scene_frame_ts_arr)
+        # init video scenes
+        self.scenes = self.__init_scenes()
 
         # save important video attributes
         self.width = self.frames[0].get_width()
@@ -69,8 +96,6 @@ class VideoInfo:
         self.avg_frame_rate = self.__video_fps_info['avg_frame_rate']
         self.time_base = self.__video_fps_info['time_base']
         self.fps = eval(self.r_frame_rate)
-
-        # get scene pairs (first_frame_in_scene, last_frame_in_scene)
 
     @staticmethod
     def __frame_sort_func(frame: VideoFrame) -> int:
@@ -87,7 +112,43 @@ class VideoInfo:
     def __init_scene_frame_ts(
             self,
             scene_frame_ts_arr: List[Dict[str, int]]) -> List[int]:
-        return sorted(list(map(VideoInfo.__ts_map_func, scene_frame_ts_arr)))
+        result = sorted(list(map(VideoInfo.__ts_map_func, scene_frame_ts_arr)))
+        # add first frame pts
+        result.insert(0, self.get_frames()[0].get_pkt_pts())
+        return result
+
+    def __init_scenes(self) -> List[VideoScene]:
+        # map pts to frames
+        pts_to_frames = {}
+        for frame_n, frame in enumerate(self.get_frames()):
+            pts_to_frames[frame.get_pkt_pts()] = frame_n
+        # array of video scenes
+        video_scenes = []
+        scene_id = 0
+        scene_len = len(self.get_scene_frame_ts())
+        prev_video_scene = None
+        # iterate over scene pts
+        for idx, pts in enumerate(self.get_scene_frame_ts()):
+            first_frame = pts_to_frames[pts]
+            if idx == (scene_len - 1):
+                last_frame = len(self.frames) - 1
+            else:
+                last_frame_pts = self.get_scene_frame_ts()[idx + 1]
+                last_frame = pts_to_frames[last_frame_pts] - 1
+            # if it was a one frame scene before
+            if prev_video_scene is not None:
+                video_scene.last_frame = last_frame
+            else:
+                video_scene = VideoScene(scene_id, first_frame, last_frame)
+                video_scenes.append(video_scene)
+                scene_id += 1
+            # check if it's one frame scnene
+            frame_diff = last_frame - first_frame
+            if frame_diff == 0:
+                prev_video_scene = video_scene
+            else:
+                prev_video_scene = None
+        return video_scenes
 
     def get_name(self) -> str:
         return self.name
@@ -97,6 +158,9 @@ class VideoInfo:
 
     def get_scene_frame_ts(self) -> List[int]:
         return self.scene_frame_ts
+
+    def get_scenes(self) -> List[VideoScene]:
+        return self.scenes
 
     def get_width(self) -> int:
         return self.width
@@ -110,24 +174,38 @@ class VideoInfo:
     def get_fps(self) -> float:
         return self.fps
 
-    def save(self, output_dir: Union[str, Path]) -> None:
-        filename = Path(output_dir)/f'{self.name}.pickle'
+    def save(
+            self,
+            output_dir: Union[str, Path] = '../data/video/info') -> None:
+        # create output directory
+        output_dir = Path(output_dir)
+        # result filename
+        output_dir.mkdir(parents=True, exist_ok=True)
+        filename = output_dir/f'{self.name}.pickle'
         with open(filename, 'wb') as f:
             pickle.dump(self, f)
 
     @staticmethod
-    def load(filename: Union[str, Path]) -> VideoInfo:
+    def load(
+            name: str,
+            directory: Union[str, Path] = '../data/video/info') -> 'VideoInfo':
+        filename = Path(directory)/f'{name}.pickle'
         video_info = None
-        with open(filename, 'wb') as f:
+        with open(filename, 'rb') as f:
             video_info = pickle.load(f)
         return video_info
 
-
-    # или лучше по номеру кадра их как-то сделать????
-
-
-
-
+    @classmethod
+    def create_video_info(
+            cls,
+            filename: Union[str, Path],
+            scene_thresh: float = 0.2,
+            verbose: bool = True) -> 'VideoInfo':
+        frame_arr = get_frames_info(filename)
+        scene_frame_ts_arr = get_scene_frame_ts(filename, scene_thresh)
+        video_fps_info = get_video_fps_info(filename)
+        video_name = Path(filename).stem
+        return cls(video_name, frame_arr, scene_frame_ts_arr, video_fps_info)
 
 
 def extract_frames(
@@ -158,17 +236,6 @@ def extract_frames(
     if verbose:
         print(f'ffmpeg cmd: {ff.cmd}')
     ff.run()
-
-
-def get_video_info(
-        filename: Union[str, Path],
-        scene_thresh: float = 0.2,
-        verbose: bool = True) -> VideoInfo:
-    frame_arr = get_frames_info(filename)
-    scene_frame_ts_arr = get_scene_frame_ts(filename, scene_thresh)
-    video_fps_info = get_video_fps_info(filename)
-    video_name = Path(filename).stem
-    return VideoInfo(video_name, frame_arr, scene_frame_ts_arr, video_fps_info)
 
 
 def probe_video(
@@ -234,3 +301,10 @@ def get_video_fps_info(
     ]
     stdout, stderr = probe_video(filename, input_opts, verbose)
     return json.loads(stdout)['streams'][0]
+
+
+def save_scene_first_frames(
+        video_scenes: List[VideoScene],
+        output_dir: Union[str, Path]):
+    output_dir = Path(output_dir)
+    pass
