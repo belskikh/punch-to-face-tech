@@ -6,6 +6,8 @@ from torch.utils.data import Dataset, DataLoader
 from pathlib import Path
 from typing import Dict, Tuple, List, Union
 
+import albumentations as albu
+
 if __name__ == '__main__':
     if __package__ is None:
         import sys
