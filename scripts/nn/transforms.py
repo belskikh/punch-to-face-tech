@@ -8,7 +8,7 @@ def get_canvas_inference_transforms(
         divider: int = 32) -> albu.Compose:
 
     min_height = _check_and_get_new_side(min_height, divider)
-    min_width = _check_and_get_new_side(width, divider)
+    min_width = _check_and_get_new_side(min_width, divider)
 
     return albu.Compose([
         albu.PadIfNeeded(min_height=min_height, min_width=min_width, p=1.0),
