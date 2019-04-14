@@ -8,20 +8,12 @@ from typing import Dict, Tuple, List, Union
 
 import albumentations as albu
 
-if __name__ == '__main__':
-    if __package__ is None:
-        import sys
-        from os import path
-        sys.path.append(
-            path.dirname(
-                path.dirname(
-                    path.abspath(__file__)
-                )
-            )
-        )
-        from utils import IMG_EXT, num_cpus
-    else:
-        from ..utils import IMG_EXT, num_cpus
+# dirty hack
+import sys
+import os
+sys.path.insert(0, os.path.abspath('..'))
+
+from ..utils import IMG_EXT, num_cpus
 
 
 class CanvasInferenceDataset(Dataset):
