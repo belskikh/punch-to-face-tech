@@ -43,6 +43,7 @@ class CanvasInferenceDataset(Dataset):
         augmented = self.transforms(**data)
 
         image = augmented['image']
+        image = image.transpose((2, 0, 1))
 
         return frame_num, image
 

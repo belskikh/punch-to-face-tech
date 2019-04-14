@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Dict, Tuple, List, Union
 
 import torch
+from torch.nn import functional as F
 
 from transforms import get_canvas_inference_transforms
 from data import CanvasInferenceDataset, get_canvas_inference_dataloader
@@ -45,4 +46,5 @@ def predict(
         batch_size=batch_size
     )
 
+    model = get_model(weights_path)
     # not finished
