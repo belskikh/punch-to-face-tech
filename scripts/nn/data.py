@@ -6,7 +6,20 @@ from torch.utils.data import Dataset, DataLoader
 from pathlib import Path
 from typing import Dict, Tuple, List, Union
 
-from ..utils import IMG_EXT, num_cpus
+if __name__ == '__main__':
+    if __package__ is None:
+        import sys
+        from os import path
+        sys.path.append(
+            path.dirname(
+                path.dirname(
+                    path.abspath(__file__)
+                )
+            )
+        )
+        from utils import IMG_EXT, num_cpus
+    else:
+        from ..utils import IMG_EXT, num_cpus
 
 
 class CanvasInferenceDataset(Dataset):
@@ -43,7 +56,7 @@ class CanvasInferenceDataset(Dataset):
 def get_canvas_inference_dataloader(
         dataset: CanvasInferenceDataset,
         batch_size: int = 1,
-        num_workers: int = None):
+        num_workers: int = None) -> DataLoader:
 
     if num_workers is None:
         num_workers = num_cpus() // 2
