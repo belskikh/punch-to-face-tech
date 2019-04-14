@@ -2,8 +2,10 @@ import ffmpy
 import subprocess
 import json
 import pickle
+import shutil
 from pathlib import Path
 from typing import Dict, Tuple, List, Union
+from utils import IMG_EXT
 
 
 class VideoFrame:
@@ -142,7 +144,7 @@ class VideoInfo:
                 video_scene = VideoScene(scene_id, first_frame, last_frame)
                 video_scenes.append(video_scene)
                 scene_id += 1
-            # check if it's one frame scnene
+            # check if it's one frame scene
             frame_diff = last_frame - first_frame
             if frame_diff == 0:
                 prev_video_scene = video_scene
@@ -150,37 +152,24 @@ class VideoInfo:
                 prev_video_scene = None
         return video_scenes
 
-    def get_name(self) -> str:
-        return self.name
-
-    def get_frames(self) -> List[VideoFrame]:
-        return self.frames
-
-    def get_scene_frame_ts(self) -> List[int]:
-        return self.scene_frame_ts
-
-    def get_scenes(self) -> List[VideoScene]:
-        return self.scenes
-
-    def get_width(self) -> int:
-        return self.width
-
-    def get_height(self) -> int:
-        return self.height
-
-    def get_num_frames(self) -> int:
-        return self.num_frames
-
-    def get_fps(self) -> float:
-        return self.fps
+    def show_scenes_info(self) -> None:
+        print()
+        print(f'{self.name} scenes:')
+        for scene in self.get_scenes():
+            scene_id = scene.get_id()
+            first_frame = scene.get_first_frame()
+            last_frame = scene.get_last_frame()
+            info = f'\t{scene_id: >3} - ({first_frame: >6}, {last_frame: >6})'
+            print(info)
+        print()
 
     def save(
             self,
             output_dir: Union[str, Path] = '../data/video/info') -> None:
         # create output directory
         output_dir = Path(output_dir)
-        # result filename
         output_dir.mkdir(parents=True, exist_ok=True)
+        # result filename
         filename = output_dir/f'{self.name}.pickle'
         with open(filename, 'wb') as f:
             pickle.dump(self, f)
@@ -206,6 +195,30 @@ class VideoInfo:
         video_fps_info = get_video_fps_info(filename)
         video_name = Path(filename).stem
         return cls(video_name, frame_arr, scene_frame_ts_arr, video_fps_info)
+
+    def get_name(self) -> str:
+        return self.name
+
+    def get_frames(self) -> List[VideoFrame]:
+        return self.frames
+
+    def get_scene_frame_ts(self) -> List[int]:
+        return self.scene_frame_ts
+
+    def get_scenes(self) -> List[VideoScene]:
+        return self.scenes
+
+    def get_width(self) -> int:
+        return self.width
+
+    def get_height(self) -> int:
+        return self.height
+
+    def get_num_frames(self) -> int:
+        return self.num_frames
+
+    def get_fps(self) -> float:
+        return self.fps
 
 
 def extract_frames(
@@ -236,6 +249,42 @@ def extract_frames(
     if verbose:
         print(f'ffmpeg cmd: {ff.cmd}')
     ff.run()
+
+
+# frames have to be in frame_dir already
+# after extract_frames(...) method
+def save_scenes_first_last_frames(
+        scenes: List[VideoScene],
+        frame_dir: Union[str, Path],
+        output_dir: Union[str, Path],
+        extension: str = '.jpg',
+        ignore_errors: bool = False,
+        verbose: bool = True) -> None:
+    frame_dir = Path(frame_dir)
+    # create output directory
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    # frames to save
+    scene_frames: List[Tuple[int, int]] = []
+    for scene in scenes:
+        scene_id = scene.get_id()
+        scene_frames.append((scene_id, scene.get_first_frame()))
+        scene_frames.append((scene_id, scene.get_last_frame()))
+    # iterate over frames
+    for scene_frame in scene_frames:
+        scene_id = scene_frame[0]
+        frame_n = scene_frame[1]
+        src_path = frame_dir/f'{frame_n}{extension}'
+        if not src_path.exists():
+            if ignore_errors:
+                print(f'{src_path} doesn\'t exist')
+                continue
+            else:
+                raise FileNotFoundError(src_path)
+        dst_path = output_dir/f'{scene_id}_{frame_n}{extension}'
+        shutil.copy(str(src_path), str(dst_path))
+        if verbose:
+            print(f'done with {dst_path.name}')
 
 
 def probe_video(
@@ -301,10 +350,3 @@ def get_video_fps_info(
     ]
     stdout, stderr = probe_video(filename, input_opts, verbose)
     return json.loads(stdout)['streams'][0]
-
-
-def save_scene_first_frames(
-        video_scenes: List[VideoScene],
-        output_dir: Union[str, Path]):
-    output_dir = Path(output_dir)
-    pass
