@@ -37,7 +37,7 @@ class ConvBNRelu(nn.Module):
 class Interpolate(nn.Module):
     def __init__(
             self, size=None, scale_factor=None,
-            mode='nearest', align_corners=False):
+            mode='nearest', align_corners=None):
         super().__init__()
         self.interp = F.interpolate
         self.size = size
