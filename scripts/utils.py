@@ -1,8 +1,10 @@
 import numpy as np
 import cv2
+
 import re
 import shutil
 import time
+import os
 from pathlib import Path
 from typing import Dict, Tuple, List, Union
 
@@ -132,3 +134,11 @@ def move_img_to_dir(
             if flag:
                 new_fn = dst_dir/fn.name
                 shutil.move(str(fn), str(new_fn))
+
+
+def num_cpus() -> int:
+    "Get number of cpus"
+    try:
+        return len(os.sched_getaffinity(0))
+    except AttributeError:
+        return os.cpu_count()
