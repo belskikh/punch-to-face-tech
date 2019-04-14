@@ -11,3 +11,6 @@ https://cloud.mail.ru/public/8dFs/9XCcPe1wx
 
 ### Canvas segmentation dataset
 https://cloud.mail.ru/public/5FKM/5sgPe98Nz
+
+### Canvas segmentation pretrained weights
+https://cloud.mail.ru/public/RNuC/zt3MfZbPx
