@@ -13,7 +13,7 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath('..'))
 
-from ..utils import IMG_EXT, num_cpus
+from utils import IMG_EXT, num_cpus
 
 
 class CanvasInferenceDataset(Dataset):
