@@ -69,12 +69,7 @@ class DecoderBlock(nn.Module):
 
 
 class AlbuNet(nn.Module):
-        """
-        UNet (https://arxiv.org/abs/1505.04597) with Resnet34(https://arxiv.org/abs/1512.03385) encoder
 
-        Proposed by Alexander Buslaev: https://www.linkedin.com/in/al-buslaev/
-
-        """
     def __init__(self, num_classes=1, num_filters=32, pretrained=False):
         """
         :param num_classes:
