@@ -39,8 +39,7 @@ class CanvasInferenceDataset(Dataset):
         image = _load_image(image_file_path)
         frame_num = int(image_file_path.stem)
 
-        data = {'image': image}
-        augmented = self.transforms(**data)
+        augmented = self.transforms(image=image)
 
         image = augmented['image']
         image = image.transpose((2, 0, 1))

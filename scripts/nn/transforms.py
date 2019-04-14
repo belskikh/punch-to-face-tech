@@ -16,7 +16,7 @@ def get_canvas_inference_transforms(
     ], p=1)
 
 
-def get_center_crop(height: int = 1080, width: int = 1920) -> albu.CenterCrop:
+def get_canvas_center_crop(height: int = 1080, width: int = 1920) -> albu.CenterCrop:
     return albu.CenterCrop(height=height, width=width, p=1.0)
 
 

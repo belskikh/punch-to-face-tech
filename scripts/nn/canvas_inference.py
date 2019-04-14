@@ -5,9 +5,8 @@ from pathlib import Path
 from typing import Dict, Tuple, List, Union
 
 import torch
-from torch.nn import functional as F
 
-from transforms import get_canvas_inference_transforms
+from transforms import get_canvas_inference_transforms, get_canvas_center_crop
 from data import CanvasInferenceDataset, get_canvas_inference_dataloader
 from models import AlbuNet
 
@@ -47,4 +46,21 @@ def predict(
     )
 
     model = get_model(weights_path)
-    # not finished
+
+    # height and width from VIDEO INFO
+    center_crop = get_canvas_center_crop(height=1080, width=1920)
+
+    mask_threshold = 0.78
+
+    for frame_n, image in data_loader:
+        frame_n = frame_n.item()
+        image = image.cuda()
+        with torch.no_grad():
+            outputs = torch.sigmoid(model(image))
+            outputs = outputs > mask_threshold
+            outputs = outputs.cpu().numpy()
+        masks = [mask[0] for mask in outputs]
+        masks = [center_crop(image=mask)['image'] for mask in masks]
+        masks = [(mask * 255).astype(np.uint8) for mask in masks]
+
+    # NOT FINISHED YET
