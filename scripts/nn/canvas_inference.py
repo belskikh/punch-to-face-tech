@@ -91,6 +91,13 @@ def predict(
             _save_images(overlays, output_overlay_dir, frames)
 
 
+def _get_model(weights_path: Union[str, Path]) -> torch.nn.Module:
+    model = AlbuNet(pretrained=True).cuda()
+    model.load_state_dict(torch.load(weights_path))
+    model.eval()
+    return model
+
+
 def _get_masks(
         outputs: np.ndarray,
         crop_fn: albu.CenterCrop) -> List[np.ndarray]:
@@ -142,10 +149,3 @@ def _load_images(
 
 def _load_image(path: Union[str, Path]) -> np.ndarray:
     return cv2.imread(str(path), cv2.IMREAD_COLOR)
-
-
-def _get_model(weights_path: Union[str, Path]) -> torch.nn.Module:
-    model = AlbuNet(pretrained=True).cuda()
-    model.load_state_dict(torch.load(weights_path))
-    model.eval()
-    return model

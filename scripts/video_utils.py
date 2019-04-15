@@ -253,6 +253,38 @@ def extract_frames(
     ff.run()
 
 
+def make_video_from_frames(
+        frame_dir: Union[str, Path],
+        target_path: Union[str, Path],
+        input_fps: Union[str, float] = '30000/1001',
+        output_fps: Union[str, float] = '30000/1001',
+        crf_quality: int = 17,
+        img_ext: str = '.jpg',
+        verbose: bool = True) -> None:
+    # src path
+    frame_dir = Path(frame_dir)
+    src_path = str(frame_dir / f'%d{img_ext}')
+    # target path - only .mp4
+    target_path = Path(target_path).with_suffix('.mp4')
+    target_path.parent.mkdir(parents=True, exist_ok=True)
+    # input and output options
+    input_opts = f'-framerate {input_fps} -start_number 0'
+    output_opts = [
+        '-c:v', 'libx264',
+        '-vf', f'"fps={output_fps},format=yuv420p"',
+        '-crf', str(crf_quality)
+    ]
+    # ffmpeg arguments
+    inputs = {src_path: input_opts}
+    outputs = {target_path: output_opts}
+    # ffmpeg object
+    ff = ffmpy.FFmpeg(inputs=inputs, outputs=outputs)
+    # print cmd
+    if verbose:
+        print(f'ffmpeg cmd: {ff.cmd}')
+    ff.run()
+
+
 # frames have to be in frame_dir already
 # after extract_frames(...) method
 def save_scenes_first_last_frames(
