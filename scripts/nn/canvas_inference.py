@@ -38,13 +38,13 @@ def predict(
 
     # create output directories
     output_dir = Path(output_dir)
-    output_frame_dir = output_dir/'frames'
-    output_mask_dir = output_dir/'masks'
+    output_frame_dir = output_dir / 'frames'
+    output_mask_dir = output_dir / 'masks'
     output_frame_dir.mkdir(parents=True, exist_ok=True)
     output_mask_dir.mkdir(parents=True, exist_ok=True)
 
     if save_overlays:
-        output_overlay_dir = output_dir/'overlays'
+        output_overlay_dir = output_dir / 'overlays'
         output_overlay_dir.mkdir(parents=True, exist_ok=True)
 
     # inference transformations
@@ -81,6 +81,7 @@ def predict(
 
         masks = _get_masks(outputs, mask_crop)
         images = _load_images(frame_dir, frames, extension)
+        images = _apply_masks(images, masks)
 
         _save_images(images, output_frame_dir, frames)
         _save_images(masks, output_mask_dir, frames, extension='.png')
@@ -108,17 +109,25 @@ def _save_images(
     output_dir = Path(output_dir)
 
     for idx, frame_n in enumerate(frames):
-        filename = output_dir/f'{frame_n}{extension}'
+        filename = output_dir / f'{frame_n}{extension}'
         ret = cv2.imwrite(str(filename), images[idx])
+
+
+def _apply_masks(
+        images: List[np.ndarray],
+        masks: List[np.ndarray]) -> List[np.ndarray]:
+
+    return [cv2.bitwise_and(images[i], images[i], mask=masks[i])
+            for i in range(len(images))]
 
 
 def _create_overlays(
         images: List[np.ndarray],
         masks: List[np.ndarray],
         color: Tuple[int, int, int] = (89, 69, 15)) -> List[np.ndarray]:
-    total = len(images)
-    overlays = [make_overlay(images[i], masks[i], color) for i in range(total)]
-    return overlays
+
+    return [make_overlay(images[i], masks[i], color)
+            for i in range(len(images))]
 
 
 def _load_images(
@@ -126,7 +135,7 @@ def _load_images(
         frames: List[int],
         extension: str = '.jpg') -> List[np.ndarray]:
     frame_dir = Path(frame_dir)
-    path_templ = str(frame_dir/f'{{0}}{extension}')
+    path_templ = str(frame_dir / f'{{0}}{extension}')
     images = [_load_image(path_templ.format(frame_n)) for frame_n in frames]
     return images
 

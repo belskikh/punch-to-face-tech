@@ -172,7 +172,7 @@ class VideoInfo:
         output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
         # result filename
-        filename = output_dir/f'{self.name}.pickle'
+        filename = output_dir / f'{self.name}.pickle'
         with open(filename, 'wb') as f:
             pickle.dump(self, f)
 
@@ -180,7 +180,7 @@ class VideoInfo:
     def load(
             name: str,
             directory: Union[str, Path] = '../data/video/info') -> 'VideoInfo':
-        filename = Path(directory)/f'{name}.pickle'
+        filename = Path(directory) / f'{name}.pickle'
         video_info = None
         with open(filename, 'rb') as f:
             video_info = pickle.load(f)
@@ -232,7 +232,7 @@ def extract_frames(
     output_dir.mkdir(parents=True, exist_ok=True)
     # prepare source and target paths
     src_path = str(filename)
-    target_path = str(output_dir/'%d.jpg')
+    target_path = str(output_dir / '%d.jpg')
     # input and output options
     input_opts = None
     # -b:v 10000k - average bitrate 10mb
@@ -276,14 +276,14 @@ def save_scenes_first_last_frames(
     for scene_frame in scene_frames:
         scene_id = scene_frame[0]
         frame_n = scene_frame[1]
-        src_path = frame_dir/f'{frame_n}{extension}'
+        src_path = frame_dir / f'{frame_n}{extension}'
         if not src_path.exists():
             if ignore_errors:
                 print(f'{src_path} doesn\'t exist')
                 continue
             else:
                 raise FileNotFoundError(src_path)
-        dst_path = output_dir/f'{scene_id}_{frame_n}{extension}'
+        dst_path = output_dir / f'{scene_id}_{frame_n}{extension}'
         shutil.copy(str(src_path), str(dst_path))
         if verbose:
             print(f'done with {dst_path.name}')

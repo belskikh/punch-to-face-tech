@@ -29,11 +29,11 @@ def create_overlays(
     # if img_dir, mask_dir and overlay_dir
     # are not absolute paths
     if root_dir not in img_dir.parents:
-        img_dir = root_dir/img_dir
+        img_dir = root_dir / img_dir
     if root_dir not in mask_dir.parents:
-        mask_dir = root_dir/mask_dir
+        mask_dir = root_dir / mask_dir
     if root_dir not in overlay_dir.parents:
-        overlay_dir = root_dir/overlay_dir
+        overlay_dir = root_dir / overlay_dir
     # if directory for overlays doesn't exist
     overlay_dir.mkdir(parents=True, exist_ok=True)
     # iterate over image paths
@@ -41,7 +41,7 @@ def create_overlays(
         if str.lower(fn.suffix) not in IMG_EXT:
             continue
         img = cv2.imread(str(fn), cv2.IMREAD_COLOR)
-        mask_fn = mask_dir/fn.name
+        mask_fn = mask_dir / fn.name
         mask = cv2.imread(str(mask_fn), cv2.IMREAD_GRAYSCALE)
         if mask is None:
             if ignore_errors:
@@ -49,7 +49,7 @@ def create_overlays(
             else:
                 raise FileNotFoundError(mask_fn)
         overlay = make_overlay(img, mask, color, alpha)
-        ret = cv2.imwrite(str(overlay_dir/fn.name), overlay)
+        ret = cv2.imwrite(str(overlay_dir / fn.name), overlay)
         if verbose:
             print(f'done with {fn.name}')
 
@@ -90,7 +90,7 @@ def make_ordered_directory(directory: Union[str, Path]) -> None:
     res_dir = Path(directory)
     directory = Path(directory)
     millis = int(round(time.time() * 1000))
-    tmp_dir = directory.parent/f'{millis}_{directory.name}'
+    tmp_dir = directory.parent / f'{millis}_{directory.name}'
     directory.replace(tmp_dir)
     res_dir.mkdir()
     files = sorted(tmp_dir.iterdir(), key=sort_frame_func)
@@ -98,7 +98,7 @@ def make_ordered_directory(directory: Union[str, Path]) -> None:
     for fn in files:
         if str.lower(fn.suffix) not in IMG_EXT:
             continue
-        new_fn = res_dir/f'{file_n}{fn.suffix}'
+        new_fn = res_dir / f'{file_n}{fn.suffix}'
         shutil.move(str(fn), str(new_fn))
         file_n += 1
     shutil.rmtree(str(tmp_dir), ignore_errors=True)
@@ -132,7 +132,7 @@ def move_img_to_dir(
         if fn.stem.isnumeric():
             flag = img_indices is None or int(fn.stem) in img_indices
             if flag:
-                new_fn = dst_dir/fn.name
+                new_fn = dst_dir / fn.name
                 shutil.move(str(fn), str(new_fn))
 
 
