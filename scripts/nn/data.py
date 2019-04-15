@@ -76,7 +76,7 @@ def _load_mask(path: Union[str, Path]) -> np.ndarray:
     return mask
 
 
-def _check_frame_path(fn: Path):
+def _check_frame_path(fn: Path) -> bool:
     flag = str.lower(fn.suffix) in IMG_EXT
     flag = flag and fn.stem.isnumeric()
     return flag
