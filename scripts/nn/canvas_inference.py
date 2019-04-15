@@ -80,15 +80,15 @@ def predict(
             outputs = outputs.cpu().numpy()
 
         masks = _get_masks(outputs, mask_crop)
-        images = _load_images(frame_dir, frames, extension)
-        images = _apply_masks(images, masks)
-
-        _save_images(images, output_frame_dir, frames)
         _save_images(masks, output_mask_dir, frames, extension='.png')
 
+        images = _load_images(frame_dir, frames, extension)
         if save_overlays:
             overlays = _create_overlays(images, masks, overlay_color)
             _save_images(overlays, output_overlay_dir, frames)
+
+        images = _apply_masks(images, masks)
+        _save_images(images, output_frame_dir, frames)
 
 
 def _get_model(weights_path: Union[str, Path]) -> torch.nn.Module:
