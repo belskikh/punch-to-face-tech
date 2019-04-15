@@ -272,8 +272,9 @@ def make_video_from_frames(
     input_opts = f'-framerate {input_fps} -start_number 0'
     output_opts = [
         '-c:v', 'libx264',
-        '-vf', f'"fps={output_fps},format=yuv420p"',
-        '-crf', str(crf_quality)
+        '-vf', f'fps={output_fps}, format=yuv420p',
+        '-crf', str(crf_quality),
+        '-y'
     ]
     # ffmpeg arguments
     inputs = {src_path: input_opts}
