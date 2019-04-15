@@ -8,6 +8,8 @@ from tqdm import tqdm
 
 import torch
 
+import albumentations as albu
+
 from transforms import get_canvas_inference_transforms, get_canvas_center_crop
 from data import CanvasInferenceDataset, get_canvas_inference_dataloader
 from models import AlbuNet
@@ -24,7 +26,6 @@ from utils import make_overlay
 def predict(
         frame_dir: Union[str, Path],
         output_dir: Union[str, Path],
-        dataset: CanvasInferenceDataset,
         batch_size: int = 1,
         mask_threshold: float = 0.78,
         height: int = 1080,
@@ -76,10 +77,8 @@ def predict(
             outputs = torch.sigmoid(model(image))
             outputs = outputs > mask_threshold
             outputs = outputs.cpu().numpy()
-        masks = [mask[0] for mask in outputs]
-        masks = [mask_crop(image=mask)['image'] for mask in masks]
-        masks = [(mask * 255).astype(np.uint8) for mask in masks]
 
+        masks = _get_masks(outputs, mask_crop)
         images = _load_images(frame_dir, frames, extension)
 
         _save_images(images, output_frame_dir, frames)
@@ -88,6 +87,15 @@ def predict(
         if save_overlays:
             overlays = _create_overlays(images, masks, overlay_color)
             _save_images(overlays, output_overlay_dir, frames)
+
+
+def _get_masks(
+        outputs: np.ndarray,
+        crop_fn: albu.CenterCrop) -> List[np.ndarray]:
+    masks = [mask[0] for mask in outputs]
+    masks = [crop_fn(image=mask)['image'] for mask in masks]
+    masks = [(mask * 255).astype(np.uint8) for mask in masks]
+    return masks
 
 
 def _save_images(
