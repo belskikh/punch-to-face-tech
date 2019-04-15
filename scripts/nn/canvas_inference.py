@@ -108,7 +108,7 @@ def _save_images(
     output_dir = Path(output_dir)
 
     for idx, frame_n in enumerate(frames):
-        filename = output/f'{frame_n}{extension}'
+        filename = output_dir/f'{frame_n}{extension}'
         ret = cv2.imwrite(str(filename), images[idx])
 
 
