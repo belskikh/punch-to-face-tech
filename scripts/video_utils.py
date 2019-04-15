@@ -267,6 +267,7 @@ def make_video_from_frames(
     # target path - only .mp4
     target_path = Path(target_path).with_suffix('.mp4')
     target_path.parent.mkdir(parents=True, exist_ok=True)
+    target_path = str(target_path)
     # input and output options
     input_opts = f'-framerate {input_fps} -start_number 0'
     output_opts = [
