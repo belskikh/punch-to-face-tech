@@ -118,6 +118,7 @@ def _create_overlays(
         color: Tuple[int, int, int] = (89, 69, 15)) -> List[np.ndarray]:
     total = len(images)
     overlays = [make_overlay(images[i], masks[i], color) for i in range(total)]
+    return overlays
 
 
 def _load_images(
