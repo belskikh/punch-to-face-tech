@@ -26,6 +26,7 @@ from utils import make_overlay
 def predict(
         frame_dir: Union[str, Path],
         output_dir: Union[str, Path],
+        weights_path: Union[str, Path],
         batch_size: int = 1,
         mask_threshold: float = 0.78,
         height: int = 1080,
@@ -33,7 +34,7 @@ def predict(
         divider: int = 32,
         extension: str = '.jpg',
         save_overlays: bool = True,
-        overlay_color: Tuple[int, int, int] = (89, 69, 15)):
+        overlay_color: Tuple[int, int, int] = (89, 69, 15)) -> None:
 
     # create output directories
     output_dir = Path(output_dir)
