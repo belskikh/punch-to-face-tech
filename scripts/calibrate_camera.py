@@ -36,15 +36,32 @@ class OctagonMarker:
         # инициализируем точки нашей метки
         self._init_points()
 
-    # матрица поворота, для получения точек октагона
+    # rotation matrix for getting octagon points
     def _get_rotation_mat(self) -> np.ndarray:
-        # угол поворота в радианах
+        # rotation degree in radians
         angle: float = np.deg2rad(-45.0)
-        return np.array([
+        # rotation matrix
+        rotation = np.array([
             [np.cos(angle), np.sin(angle) * -1, 0.0],
             [np.sin(angle), np.cos(angle), 0.0],
             [0.0, 0.0, 1.0]
-        ]).T
+        ])
+        # transform origin to octagon center
+        transform = np.array([
+            [1.0, 0.0, self.center[0]],
+            [0.0, 1.0, self.center[1]],
+            [0.0, 0.0, 1.0]
+        ])
+        # transform octagon center to origin
+        inv_transform = np.array([
+            [1.0, 0.0, -self.center[0]],
+            [0.0, 1.0, -self.center[1]],
+            [0.0, 0.0, 1.0]
+        ])
+        # result matrix
+        result = inv_transform.dot(rotation).dot(transform)
+        # transpose result 
+        return result.T
 
     # инициализируем точки метки
     def _init_points(self) -> None:
