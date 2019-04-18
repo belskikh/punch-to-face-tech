@@ -36,6 +36,15 @@ class OctagonMarker:
         # инициализируем точки нашей метки
         self._init_points()
 
+    def _get_inverse_transform_mat(self) -> np.ndarray:
+        # transform octagon center to origin
+        inv_transform = np.array([
+            [1.0, 0.0, -self.center[0]],
+            [0.0, 1.0, -self.center[1]],
+            [0.0, 0.0, 1.0]
+        ]).T
+        return inv_transform
+
     # rotation matrix for getting octagon points
     def _get_rotation_mat(self) -> np.ndarray:
         # rotation degree in radians
@@ -53,11 +62,7 @@ class OctagonMarker:
             [0.0, 0.0, 1.0]
         ]).T
         # transform octagon center to origin
-        inv_transform = np.array([
-            [1.0, 0.0, -self.center[0]],
-            [0.0, 1.0, -self.center[1]],
-            [0.0, 0.0, 1.0]
-        ]).T
+        inv_transform = self._get_inverse_transform_mat()
         # result matrix
         result = inv_transform.dot(rotation).dot(transform)
         return result
@@ -89,15 +94,58 @@ class OctagonMarker:
     def get_points_3D(self) -> np.ndarray:
         return self.points_3D
 
-    # def get_id_to_2D_projection(
-    #         self,
-    #         # width, height
-    #         img_size: Tuple[int, int],
-    #         # width, height
-    #         marker_size: Tuple[int, int]) -> FramePointsMap:
+    def _get_3D_to_img_mat(self,
+            # width, height
+            marker_size: Tuple[int, int]) -> np.ndarray:
+        # transform marker from 3D to image
+        w, h = marker_size
+        mat = np.array([
+            [w // 2, 0.0, w // 2],
+            [0.0, -(h // 2), h // 2],
+            [0.0, 0.0, 1.0]
+        ]).T
+        return mat
 
-    #     points = self.get_points().copy()
+    def get_2D_texture_projection(
+            self,
+            # width, height
+            img_size: Tuple[int, int],
+            # width, height
+            marker_size: Tuple[int, int]) -> np.ndarray:
 
+        flag = img_size[0] >= marker_size[0]
+        flag = flag and img_size[1] >= marker_size[1]
+        flag = flag and img_size[0] > 0 and img_size[1] > 0
+        flag = flag and marker_size[0] > 0 and marker_size[1] > 0
+        flag = flag and marker_size[0] % 2 == 0
+        flag = flag and marker_size[1] % 2 == 0
+
+        assert flag, 'Invalid img size or marker size'
+
+        # transform octagon center to origin
+        inv_transform = self._get_inverse_transform_mat()
+        points = self.get_points().copy().dot(inv_transform)
+
+        # normalize points
+        points = points / points.max(axis=0)
+
+        # map marker to 2D
+        # relative to marker size
+        mat = _get_3D_to_img_mat(marker_size)
+        points_img = points.dot(mat)
+
+        # from marker coordinate system
+        # to image coordinate system
+        img_w, img_h = img_size
+        mark_w, mark_h = marker_size
+        start_x = img_w // 2 - mark_w // 2
+        start_y = img_h // 2 - mark_h // 2
+        points[:, :, 0] += start_x
+        points[:, :, 1] += start_y
+        points = points[:, :, 0:2]
+
+        # Round elements
+        return np.rint(points)
 
     def get_max_length(self):
         return 8
