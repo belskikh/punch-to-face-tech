@@ -94,7 +94,8 @@ class OctagonMarker:
     def get_points_3D(self) -> np.ndarray:
         return self.points_3D
 
-    def _get_3D_to_img_mat(self,
+    def _get_3D_to_img_mat(
+            self,
             # width, height
             marker_size: Tuple[int, int]) -> np.ndarray:
         # transform marker from 3D to image
@@ -131,7 +132,7 @@ class OctagonMarker:
 
         # map marker to 2D
         # relative to marker size
-        mat = _get_3D_to_img_mat(marker_size)
+        mat = self._get_3D_to_img_mat(marker_size)
         points_img = points.dot(mat)
 
         # from marker coordinate system
