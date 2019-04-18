@@ -141,12 +141,12 @@ class OctagonMarker:
         mark_w, mark_h = marker_size
         start_x = img_w // 2 - mark_w // 2
         start_y = img_h // 2 - mark_h // 2
-        points[:, :, 0] += start_x
-        points[:, :, 1] += start_y
-        points = points[:, :, 0:2]
+        points_img[:, :, 0] += start_x
+        points_img[:, :, 1] += start_y
+        points_img = points_img[:, :, 0:2]
 
         # Round elements
-        return np.rint(points)
+        return np.rint(points_img)
 
     def get_max_length(self):
         return 8
