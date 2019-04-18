@@ -35,7 +35,6 @@ class OctagonMarker:
         self.y_diff: float = self.side / np.sqrt(2)
         # инициализируем точки нашей метки
         self._init_points()
-        self._init_points_3D()
 
     # rotation matrix for getting octagon points
     def _get_rotation_mat(self) -> np.ndarray:
@@ -61,7 +60,7 @@ class OctagonMarker:
         ])
         # result matrix
         result = inv_transform.dot(rotation).dot(transform)
-        # transpose result 
+        # transpose result
         return result.T
 
     # инициализируем точки метки
@@ -73,24 +72,22 @@ class OctagonMarker:
         # first point, id=0
         x: float = self.center[0] - self.side / 2.0
         y: float = self.center[1] + self.height / 2.0
-        z: float = 0.0
+        z: float = 1.0
         points.append(np.array([[x, y, z]]))
         # поворачиваем на 45 градусов и получаем координаты следующих точек
         for pid in range(1, 8):
             points.append(points[pid - 1].dot(self._rot_mat))
         # convert to numpy array
         self.points = np.array(points, dtype=points[0].dtype)
-
-    def _init_points_3D(self) -> None:
-        self.id_to_3D_points = {}
-        for pid, point in enumerate(self.points):
-            self.id_to_3D_points[pid] = point
+        # init points in 3D -> (x, y, 0)
+        points_3D = self.points.copy()
+        self.points_3D = points_3D[:, :, 2] = 0.0
 
     def get_points(self) -> np.ndarray:
         return self.points
 
-    def get_id_to_3D_points(self) -> FramePointsMap:
-        return self.id_to_3D_points
+    def get_points_3D(self) -> np.ndarray:
+        return self.points_3D
 
     # def get_id_to_2D_projection(
     #         self,
@@ -116,15 +113,16 @@ class CameraCalibration:
     # для каждой 2D точки в кадре
     # находим её 3D координаты
     def _get_frame_points(self, points: List[Point]) -> PointPairs:
-        #  pid -> 3D координата на плоскости без Z (x, y)
-        marker_points_in_3D: FramePointsMap = self.marker.get_id_to_3D_points()
+        # marker planer points (x, y, 0)
+        # sorted by point ID
+        marker_points_in_3D: np.ndarray = self.marker.get_points_3D()
 
         points_in_2D = []
         points_in_3D = []
 
         for point in points:
             points_in_2D.append([point.x, point.y])
-            points_in_3D.append(marker_points_in_3D[point.id])
+            points_in_3D.append(marker_points_in_3D[point.id].copy())
 
         points_in_2D = np.array(points_in_2D, dtype=np.float32).reshape(-1, 1, 2)
         points_in_3D = np.array(points_in_3D, dtype=np.float32).reshape(-1, 1, 3)
