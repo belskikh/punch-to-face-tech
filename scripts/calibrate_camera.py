@@ -45,23 +45,22 @@ class OctagonMarker:
             [np.cos(angle), np.sin(angle) * -1, 0.0],
             [np.sin(angle), np.cos(angle), 0.0],
             [0.0, 0.0, 1.0]
-        ])
+        ]).T
         # transform origin to octagon center
         transform = np.array([
             [1.0, 0.0, self.center[0]],
             [0.0, 1.0, self.center[1]],
             [0.0, 0.0, 1.0]
-        ])
+        ]).T
         # transform octagon center to origin
         inv_transform = np.array([
             [1.0, 0.0, -self.center[0]],
             [0.0, 1.0, -self.center[1]],
             [0.0, 0.0, 1.0]
-        ])
+        ]).T
         # result matrix
         result = inv_transform.dot(rotation).dot(transform)
-        # transpose result
-        return result.T
+        return result
 
     # инициализируем точки метки
     def _init_points(self) -> None:
