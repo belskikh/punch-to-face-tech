@@ -81,7 +81,8 @@ class OctagonMarker:
         self.points = np.array(points, dtype=points[0].dtype)
         # init points in 3D -> (x, y, 0)
         points_3D = self.points.copy()
-        self.points_3D = points_3D[:, :, 2] = 0.0
+        points_3D[:, :, 2] = 0.0
+        self.points_3D = points_3D
 
     def get_points(self) -> np.ndarray:
         return self.points
