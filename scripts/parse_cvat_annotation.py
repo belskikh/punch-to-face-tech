@@ -18,7 +18,7 @@ class Point:
         self.x: float = coords[0]
         self.y: float = coords[1]
 
-    def get_point(self):
+    def get_coords(self):
         return self.x, self.y
 
     def get_x(self):
