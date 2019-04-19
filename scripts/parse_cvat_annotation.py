@@ -9,10 +9,26 @@ __all__ = ['parse_cvat_xml']
 
 class Point:
 
-    def __init__(self, point_id: int, coords: Tuple[float, float]) -> None:
+    def __init__(
+            self,
+            point_id: int,
+            coords: Tuple[float, float]) -> None:
+
         self.id: int = point_id
         self.x: float = coords[0]
         self.y: float = coords[1]
+
+    def get_point(self):
+        return self.x, self.y
+
+    def get_x(self):
+        return self.x
+
+    def get_y(self):
+        return self.y
+
+    def get_id(self):
+        return self.id
 
 
 class Annotation:

@@ -83,16 +83,14 @@ class OctagonMarker:
             points.append(points[pid - 1].dot(self._rot_mat))
         # convert to numpy array
         self.points = np.array(points, dtype=points[0].dtype)
-        # init points in 3D -> (x, y, 0)
-        points_3D = self.points.copy()
-        points_3D[:, :, 2] = 0.0
-        self.points_3D = points_3D
 
     def get_points(self) -> np.ndarray:
         return self.points
 
-    def get_points_3D(self) -> np.ndarray:
-        return self.points_3D
+    def get_points_3D(self, z: float = 0.0) -> np.ndarray:
+        points_3D = self.points.copy()
+        points_3D[..., 2] = z
+        return points_3D
 
     def _get_3D_to_img_mat(
             self,

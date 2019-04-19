@@ -142,3 +142,55 @@ def num_cpus() -> int:
         return len(os.sched_getaffinity(0))
     except AttributeError:
         return os.cpu_count()
+
+
+def draw_points(
+        img: np.ndarray,
+        points: np.ndarray,
+        color: Tuple[int, int, int] = (0, 0, 255),
+        radius: int = 5,
+        draw_ids: bool = False,
+        point_ids: List[int] = None,
+        font_scale: float = 1.0,
+        font_thickness: int = 2) -> np.ndarray:
+
+    draw_ids = draw_ids and point_ids is not None
+    if draw_ids:
+        flag = len(points) == len(point_ids)
+        msg = 'There has to be equal number of points and point IDs'
+        assert flag, msg
+    # make copies
+    # in order not to modify original objects
+    img = img.copy()
+    points = points.copy()
+    # prepare points
+    if points.shape[-1] > 2:
+        points = points[..., 0:2]
+    points = np.rint(points.reshape(-1, 2)).astype(np.int32)
+    # iterate and draw
+    for p_id, point in enumerate(points):
+        point = tuple(point)
+        cv2.circle(
+            img=img,
+            center=point,
+            radius=radius,
+            color=color,
+            thickness=-1
+        )
+        # draw point IDs
+        if draw_ids:
+            text = str(p_id)
+            t_x = point[0] + radius * 2
+            t_y = point[1] - radius * 2
+            point = (t_x, t_y)
+            cv2.putText(
+                img=img,
+                text=text,
+                org=point,
+                fontFace=cv2.FONT_HERSHEY_SIMPLEX,
+                fontScale=font_scale,
+                color=color,
+                thickness=font_thickness
+            )
+    # return img with points drawn
+    return img
