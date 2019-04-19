@@ -168,7 +168,7 @@ def draw_points(
         points = points[..., 0:2]
     points = np.rint(points.reshape(-1, 2)).astype(np.int32)
     # iterate and draw
-    for p_id, point in enumerate(points):
+    for i, point in enumerate(points):
         point = tuple(point)
         cv2.circle(
             img=img,
@@ -179,7 +179,7 @@ def draw_points(
         )
         # draw point IDs
         if draw_ids:
-            text = str(p_id)
+            text = str(point_ids[i])
             t_x = point[0] + radius * 2
             t_y = point[1] - radius * 2
             point = (t_x, t_y)
