@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 
 from pathlib import Path
-from typing import Tuple, List, Union
+from typing import Tuple, List, Union, Dict
 from tqdm import tqdm
 
 from video_utils import VideoScene
