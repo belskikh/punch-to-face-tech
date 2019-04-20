@@ -10,7 +10,8 @@ from video_utils import VideoScene
 
 
 __all__ = [
-    'SIFT'
+    'SIFT',
+    'calc_scene_homography'
 ]
 
 
