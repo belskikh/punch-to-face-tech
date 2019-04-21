@@ -101,11 +101,11 @@ class HomographyHelper:
                 ransacReprojThreshold=self.reproj_thresh
             )
 
-            # return the matches along with the homograpy matrix
+            # return the matches along with the homography matrix
             # and status of each matched point
             return matches, H, status
 
-        # otherwise, no homograpy could be computed
+        # otherwise, no homography could be computed
         return None
 
     @staticmethod
@@ -246,7 +246,43 @@ def get_img_texture_homography(
 def warp_img_to_texture(
         img: np.ndarray,
         mask: np.ndarray,
-        texture_points: np.ndarray,
+        homography: np.ndarray,
         texture_size: Tuple[int, int] = (1024, 1024)
 ) -> Tuple[np.ndarray, np.ndarray]:
-    pass
+
+    img_warped = cv2.warpPerspective(
+        src=img, M=homography,
+        dsize=texture_size,
+        flags=cv2.INTER_LANCZOS4
+    )
+
+    mask_warped = cv2.warpPerspective(
+        src=mask, M=homography,
+        dsize=texture_size,
+        flags=cv2.INTER_NEAREST
+    )
+    return img_warped, mask_warped
+
+
+def calc_homography_and_warp(
+        img: np.ndarray,
+        mask: np.ndarray,
+        frame_points: List[Point],
+        marker: OctagonMarker,
+        texture_size: Tuple[int, int] = (1024, 1024),
+        marker_size: Tuple[int, int] = (600, 600)
+) -> Tuple[np.ndarray, np.ndarray]:
+
+    H, status, texture_points = get_img_texture_homography(
+        frame_points=frame_points,
+        marker=marker,
+        texture_size=texture_size,
+        marker_size=marker_size
+    )
+    img_warped, mask_warped = warp_img_to_texture(
+        img=img,
+        mask=mask,
+        homography=H,
+        texture_size=texture_size
+    )
+    return img_warped, mask_warped
