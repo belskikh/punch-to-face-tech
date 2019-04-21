@@ -1,3 +1,5 @@
+import numpy as np
+
 from lxml import etree
 from typing import Union, Tuple, Dict, List
 from pathlib import Path
@@ -55,7 +57,7 @@ class Annotation:
     def get_frames(self) -> Dict[int, List[Point]]:
         return self.frames
 
-    def get_frame_points(self, frame_n: int) -> Tuple[np.array, List[int]]:
+    def get_frame_points(self, frame_n: int) -> Tuple[np.ndarray, List[int]]:
         points = []
         point_ids = []
         for point in self.get_frames()[frame_n]:
