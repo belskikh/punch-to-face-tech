@@ -235,7 +235,7 @@ def get_img_texture_homography(
     )
 
     points_in_img, points_in_texture = get_point_pairs_2D(
-        frame_points=aframe_points,
+        frame_points=frame_points,
         texture_points=texture_points
     )
 
