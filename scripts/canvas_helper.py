@@ -127,7 +127,7 @@ class HomographyHelper:
         h2, w2 = image2.shape[:2]
         vis = np.zeros((max(h1, h2), w1 + w2, 3), dtype="uint8")
         vis[0:h1, 0:w1] = image1
-        vis[0:h2, w1:] = image1
+        vis[0:h2, w1:] = image2
 
         # loop over the matches
         for ((trainIdx, queryIdx), s) in zip(matches, status):
