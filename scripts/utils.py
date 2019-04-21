@@ -201,7 +201,7 @@ def draw_points(
 
 def show_img(
         img: np.ndarray,
-        fig_size: Tuple[float, float]) -> None:
+        fig_size: Tuple[float, float] = (10.0, 10.0)) -> None:
 
     new_fig_size = list(fig_size)
     orig_fig_size = list(matplotlib.rcParams['figure.figsize'])
