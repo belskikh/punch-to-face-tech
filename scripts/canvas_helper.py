@@ -7,12 +7,8 @@ from typing import Tuple, List, Union, Dict
 from tqdm import tqdm
 
 from video_utils import VideoScene
-
-
-__all__ = [
-    'SIFT',
-    'calc_scene_homography'
-]
+from calibrate_camera import OctagonMarker
+from parse_cvat_annotation import Point
 
 
 # aliases
@@ -20,7 +16,7 @@ Matches = List[Tuple[int, int]]
 HomographyResult = Tuple[Matches, np.ndarray, np.ndarray]
 
 
-class SIFT:
+class HomographyHelper:
 
     def __init__(
             self,
@@ -112,8 +108,8 @@ class SIFT:
         # otherwise, no homograpy could be computed
         return None
 
+    @staticmethod
     def drawMatches(
-            self,
             image1: np.ndarray,
             image2: np.ndarray,
             kps1: List[cv2.KeyPoint],
@@ -168,7 +164,7 @@ def calc_scene_homography(
         frame_dir: Union[str, Path],
         mask_dir: Union[str, Path]) -> Dict[int, HomographyResult]:
 
-    sift = SIFT()
+    homo = HomographyHelper()
 
     prev_frame = None
     prev_mask = None
@@ -191,7 +187,7 @@ def calc_scene_homography(
 
         images = (prev_frame, frame)
         masks = (prev_mask, mask)
-        M = sift.calc_homography(images, masks)
+        M = homo.calc_homography(images, masks)
 
         result[prev_frame_n] = M
 
@@ -199,3 +195,58 @@ def calc_scene_homography(
         prev_mask = mask
 
     return result
+
+
+# def save_scene_homography():
+#     pass
+
+
+def get_point_pairs_2D(
+        frame_points: List[Point],
+        texture_points: np.ndarray):
+
+    points_in_img = []
+    points_in_texture = []
+
+    for point in frame_points:
+        points_in_img.append(point.get_coords())
+        points_in_texture.append(texture_points[point.get_id()].copy())
+
+    points_in_img = np.array(
+        points_in_img,
+        dtype=np.float32).reshape(-1, 1, 2)
+    points_in_texture = np.array(
+        points_in_texture,
+        dtype=np.float32).reshape(-1, 1, 2)
+
+    return points_in_img, points_in_texture
+
+
+def get_img_texture_homography(
+        frame_points: List[Point],
+        marker: OctagonMarker,
+        texture_size: Tuple[int, int] = (1024, 1024),
+        marker_size: Tuple[int, int] = (600, 600)
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+
+    texture_points = marker.get_2D_texture_projection(
+        img_size=texture_size,
+        marker_size=marker_size
+    )
+
+    points_in_img, points_in_texture = get_point_pairs_2D(
+        frame_points=aframe_points,
+        texture_points=texture_points
+    )
+
+    H, status = cv2.findHomography(points_in_img, points_in_texture)
+    return H, status, texture_points
+
+
+def warp_img_to_texture(
+        img: np.ndarray,
+        mask: np.ndarray,
+        texture_points: np.ndarray,
+        texture_size: Tuple[int, int] = (1024, 1024)
+) -> Tuple[np.ndarray, np.ndarray]:
+    pass
