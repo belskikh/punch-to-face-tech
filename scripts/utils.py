@@ -8,6 +8,9 @@ import os
 from pathlib import Path
 from typing import Dict, Tuple, List, Union
 
+import matplotlib
+import matplotlib.pyplot as plt
+
 
 IMG_EXT = ['.png', '.jpg', '.jpeg']
 
@@ -194,3 +197,25 @@ def draw_points(
             )
     # return img with points drawn
     return img
+
+
+def show_img(
+        img: np.ndarray,
+        fig_size: Tuple[float, float]) -> None:
+
+    new_fig_size = list(fig_size)
+    orig_fig_size = list(matplotlib.rcParams['figure.figsize'])
+    if new_fig_size != orig_fig_size:
+        matplotlib.rcParams['figure.figsize'] = new_fig_size
+
+    img_shape = img.shape
+
+    if len(img_shape) == 2:
+        plt.imshow(img, cmap='gray')
+    else:
+        if img_shape[2] == 4:
+            img = img[..., 0:3]
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        plt.imshow(img)
+
+    plt.show()
