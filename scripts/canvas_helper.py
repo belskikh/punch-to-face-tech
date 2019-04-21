@@ -109,7 +109,7 @@ class HomographyHelper:
         return None
 
     @staticmethod
-    def drawMatches(
+    def draw_matches(
             image1: np.ndarray,
             image2: np.ndarray,
             kps1: List[cv2.KeyPoint],
@@ -145,7 +145,8 @@ class HomographyHelper:
     def calc_homography(
             self,
             images: Tuple[np.ndarray, np.ndarray],
-            masks: Tuple[np.ndarray, np.ndarray]) -> HomographyResult:
+            masks: Tuple[np.ndarray, np.ndarray],
+            draw_matches: bool = False) -> HomographyResult:
 
         image1, image2 = images
         mask1, mask2 = masks
@@ -155,6 +156,17 @@ class HomographyHelper:
 
         # # match features between the two images
         M = self.match_keypoints(kps1, kps2, features1, features2)
+
+        if M is not None and draw_matches:
+            vis = HomographyHelper.draw_matches(
+                image1=image1,
+                image2=image2,
+                kps1=kps1,
+                kps2=kps2,
+                matches=M[0],
+                status=M[2]
+            )
+            return M, vis
 
         return M
 
