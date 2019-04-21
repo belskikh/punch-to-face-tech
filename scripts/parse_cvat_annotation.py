@@ -55,6 +55,15 @@ class Annotation:
     def get_frames(self) -> Dict[int, List[Point]]:
         return self.frames
 
+    def get_frame_points(self, frame_n: int) -> Tuple[np.array, List[int]]:
+        points = []
+        point_ids = []
+        for point in self.get_frames()[frame_n]:
+            points.append(point.get_coords())
+            point_ids.append(point.get_id())
+        points = np.array(points)
+        return points, point_ids
+
 
 def parse_cvat_xml(filename: Union[str, Path]) -> Annotation:
     filename = Path(filename)
