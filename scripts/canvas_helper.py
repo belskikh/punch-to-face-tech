@@ -10,6 +10,7 @@ import json
 from video_utils import VideoScene
 from calibrate_camera import OctagonMarker
 from parse_cvat_annotation import Point
+import utils
 
 
 # aliases
