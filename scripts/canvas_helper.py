@@ -296,7 +296,7 @@ def calc_scene_homography(
     homo = HomographyHelper()
 
     first_frame_n = video_scene.get_first_frame()
-    num_frames = video_scene.get_num_frames()()
+    num_frames = video_scene.get_num_frames()
 
     # save init_homo to result
     prev_frame_n = first_frame_n
