@@ -150,6 +150,7 @@ def num_cpus() -> int:
 def draw_points(
         img: np.ndarray,
         points: np.ndarray,
+        mask: np.ndarray = None,
         color: Tuple[int, int, int] = (0, 0, 255),
         radius: int = 5,
         draw_ids: bool = False,
@@ -170,6 +171,9 @@ def draw_points(
     if points.shape[-1] > 2:
         points = points[..., 0:2]
     points = np.rint(points.reshape(-1, 2)).astype(np.int32)
+    # apply mask if needed
+    if mask is not None:
+        img = cv2.bitwise_and(img, img, mask=mask)
     # iterate and draw
     for i, point in enumerate(points):
         point = tuple(point)
@@ -201,12 +205,16 @@ def draw_points(
 
 def show_img(
         img: np.ndarray,
+        mask: np.ndarray = None,
         fig_size: Tuple[float, float] = (10.0, 10.0)) -> None:
 
     new_fig_size = list(fig_size)
     orig_fig_size = list(matplotlib.rcParams['figure.figsize'])
     if new_fig_size != orig_fig_size:
         matplotlib.rcParams['figure.figsize'] = new_fig_size
+
+    if mask is not None:
+        img = cv2.bitwise_and(img, img, mask=mask)
 
     img_shape = img.shape
 

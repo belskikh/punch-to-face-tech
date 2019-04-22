@@ -15,8 +15,9 @@ __all__ = [
 
 
 # aliases
-FramePointsMap = Dict[int, np.ndarray]
+WidthHeight = Tuple[int, int]
 PointPairs = Tuple[np.ndarray, np.ndarray]
+
 
 
 class OctagonMarker:
@@ -94,8 +95,7 @@ class OctagonMarker:
 
     def _get_3D_to_img_mat(
             self,
-            # width, height
-            marker_size: Tuple[int, int]) -> np.ndarray:
+            marker_size: WidthHeight) -> np.ndarray:
         # transform marker from 3D to image
         w, h = marker_size
         mat = np.array([
@@ -107,10 +107,8 @@ class OctagonMarker:
 
     def get_2D_texture_projection(
             self,
-            # width, height
-            img_size: Tuple[int, int],
-            # width, height
-            marker_size: Tuple[int, int]) -> np.ndarray:
+            img_size: WidthHeight,
+            marker_size: WidthHeight) -> np.ndarray:
 
         flag = img_size[0] >= marker_size[0]
         flag = flag and img_size[1] >= marker_size[1]

@@ -146,7 +146,8 @@ class HomographyHelper:
             self,
             images: Tuple[np.ndarray, np.ndarray],
             masks: Tuple[np.ndarray, np.ndarray],
-            draw_matches: bool = False) -> HomographyResult:
+            draw_matches: bool = False
+    ) -> Union[HomographyResult, Tuple[HomographyResult, np.ndarray]]:
 
         image1, image2 = images
         mask1, mask2 = masks
