@@ -268,9 +268,13 @@ def calc_scene_homography(
         texture_points: np.ndarray,
         frame_dir: Union[str, Path],
         mask_dir: Union[str, Path],
-        result_dir: Union[str, Path],
         texture_dir: Union[str, Path],
         texture_size: Tuple[int, int] = (1280, 1280),
+        result_name: str = (
+            'ufc234_gastelum_bisping_1080p_nosound_cut'
+            '__homography'
+        ),
+        result_dir: Union[str, Path] = '../data/video/info',
         draw_points: bool = False,
         point_color: Tuple[int, int, int] = (153, 255, 153),
         point_radius: int = 10,
@@ -424,7 +428,7 @@ def calc_scene_homography(
         prev_texture, prev_texture_mask = texture, texture_mask
 
     # save homographies
-    _save_scene_homo(result)
+    _save_scene_homo(result, name=result_name, output_dir=result_dir)
     return result
 
 
