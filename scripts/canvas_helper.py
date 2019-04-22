@@ -429,7 +429,7 @@ def calc_scene_homography(
         prev_texture, prev_texture_mask = texture, texture_mask
 
     # save homographies
-    _save_scene_homo(result, name=result_name, output_dir=result_dir)
+    # _save_scene_homo(result, name=result_name, output_dir=result_dir)
     return result
 
 
