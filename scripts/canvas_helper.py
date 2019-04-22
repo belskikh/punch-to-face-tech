@@ -318,7 +318,7 @@ def calc_scene_homography(
 
     # also save texture with image points
     if draw_points:
-        img_points = draw_points(
+        img_points = utils.draw_points(
             prev_texture, texture_points,
             color=point_color,
             draw_ids=True,
@@ -403,7 +403,7 @@ def calc_scene_homography(
 
         # also save texture with image points
         if draw_points:
-            img_points = draw_points(
+            img_points = utils.draw_points(
                 texture, texture_points,
                 color=point_color,
                 draw_ids=True,
