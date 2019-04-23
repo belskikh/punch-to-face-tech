@@ -516,3 +516,41 @@ def load_scene_homo(
         with open(filename) as json_file:
             data = json.load(json_file)
         return data
+
+
+def make_logo_frame(
+        frame: np.ndarray,
+        mask: np.ndarray,
+        texture: np.ndarray,
+        texture_mask: np.ndarray,
+        homo: np.ndarray,
+        texture_points: np.ndarray,
+        point_color: Tuple[int, int, int] = (153, 255, 153)
+) -> np.ndarray:
+
+    img_size = frame.shape[1], frame.shape[0]
+
+    texture, texture_mask = warp_img_to_texture(
+        texture, texture_mask, homo,
+        texture_size=img_size
+    )
+
+    logo_mask = cv2.bitwise_and(mask, texture_mask)
+    logo_mask_inv = cv2.bitwise_not(logo_mask)
+
+    img1_bg = cv2.bitwise_and(frame, frame, mask=logo_mask_inv)
+    img2_fg = cv2.bitwise_and(texture, texture, mask=logo_mask)
+    new_frame = cv2.add(img1_bg, img2_fg)
+
+    new_points = cv2.perspectiveTransform(
+        src=np.array([texture_points.reshape(-1, 2)]), m=homo
+    )[0]
+
+    new_frame = utils.draw_points(
+        new_frame,
+        new_points,
+        color=point_color,
+        draw_ids=True,
+        point_ids=list(range(0, 8))
+    )
+    return new_frame
