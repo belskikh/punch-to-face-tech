@@ -227,3 +227,35 @@ def show_img(
         plt.imshow(img)
 
     plt.show()
+
+
+def create_logo_texture(
+        logo_fn: Union[str, Path],
+        mask_fn: Union[str, Path],
+        texture_size: Tuple[int, int],
+        marker_size: Tuple[int, int],
+        fraction: float = 0.7) -> Tuple[np.ndarray, np.ndarray]:
+
+    logo = cv2.imread(str(logo_fn), cv2.IMREAD_COLOR)
+    mask = cv2.imread(str(mask_fn), cv2.IMREAD_GRAYSCALE)
+
+    logo_w = int(marker_size[0] * fraction)
+    logo_h = int(marker_size[1] * fraction)
+    logo_size = (logo_w, logo_h)
+
+    texture_shape = (texture_size[0], texture_size[1], 3)
+    left = texture_shape[1] // 2 - logo_w // 2
+    top = texture_shape[0] // 2 - logo_h // 2
+
+    logo = cv2.resize(logo, logo_size, interpolation=cv2.INTER_AREA)
+    mask = cv2.resize(mask, logo_size, interpolation=cv2.INTER_NEAREST)
+
+    texture = np.zeros(shape=texture_shape, dtype=logo.dtype)
+    texture_mask = np.zeros(shape=texture_size, dtype=mask.dtype)
+
+    texture[top:top + logo_h, left:left + logo_w] = cv2.bitwise_and(
+        logo, logo, mask=mask
+    )
+    texture_mask[top:top + logo_h, left:left + logo_w] = mask
+
+    return texture, texture_mask

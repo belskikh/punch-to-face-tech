@@ -229,11 +229,14 @@ def warp_img_to_texture(
         flags=cv2.INTER_LANCZOS4
     )
 
-    mask_warped = cv2.warpPerspective(
-        src=mask, M=homography,
-        dsize=texture_size,
-        flags=cv2.INTER_NEAREST
-    )
+    if mask is None:
+        mask_warped = None
+    else:
+        mask_warped = cv2.warpPerspective(
+            src=mask, M=homography,
+            dsize=texture_size,
+            flags=cv2.INTER_NEAREST
+        )
     return img_warped, mask_warped
 
 
