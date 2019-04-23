@@ -259,3 +259,19 @@ def create_logo_texture(
     texture_mask[top:top + logo_h, left:left + logo_w] = mask
 
     return texture, texture_mask
+
+
+def load_frame_and_mask(
+        frame_n: int,
+        frame_dir: Union[str, Path],
+        mask_dir: Union[str, Path],
+        frame_ext: str = '.jpg',
+        mask_ext: str = '.png'):
+
+    frame_path = frame_dir / f'{frame_n}{frame_ext}'
+    mask_path = mask_dir / f'{frame_n}{mask_ext}'
+
+    frame = cv2.imread(str(frame_path), cv2.IMREAD_COLOR)
+    mask = cv2.imread(str(mask_path), cv2.IMREAD_GRAYSCALE)
+
+    return frame, mask

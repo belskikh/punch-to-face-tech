@@ -267,8 +267,6 @@ def calc_homography_and_warp(
 def calc_scene_homography(
         init_homo: np.ndarray,
         video_scene: VideoScene,
-        points0: np.ndarray,
-        point0_ids: List[int],
         texture_points: np.ndarray,
         frame_dir: Union[str, Path],
         mask_dir: Union[str, Path],
@@ -307,7 +305,7 @@ def calc_scene_homography(
     result[prev_frame_n] = {'texture': init_homo}
 
     # save previous frame and mask
-    prev_frame, prev_mask = _load_frame_and_mask(
+    prev_frame, prev_mask = utils.load_frame_and_mask(
         frame_n=prev_frame_n,
         frame_dir=frame_dir,
         mask_dir=mask_dir
@@ -346,7 +344,7 @@ def calc_scene_homography(
     first_frame_n += 1
 
     for frame_n in tqdm(range(first_frame_n, num_frames)):
-        frame, mask = _load_frame_and_mask(
+        frame, mask = utils.load_frame_and_mask(
             frame_n=frame_n,
             frame_dir=frame_dir,
             mask_dir=mask_dir
@@ -434,22 +432,6 @@ def calc_scene_homography(
     # save homographies
     # _save_scene_homo(result, name=result_name, output_dir=result_dir)
     return result
-
-
-def _load_frame_and_mask(
-        frame_n: int,
-        frame_dir: Union[str, Path],
-        mask_dir: Union[str, Path],
-        frame_ext: str = '.jpg',
-        mask_ext: str = '.png'):
-
-    frame_path = frame_dir / f'{frame_n}{frame_ext}'
-    mask_path = mask_dir / f'{frame_n}{mask_ext}'
-
-    frame = cv2.imread(str(frame_path), cv2.IMREAD_COLOR)
-    mask = cv2.imread(str(mask_path), cv2.IMREAD_GRAYSCALE)
-
-    return frame, mask
 
 
 def _save_img(
