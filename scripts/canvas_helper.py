@@ -453,7 +453,7 @@ def calc_scene_homography_and_texture(
         point_radius: int = 10,
         point_font_scale: float = 1.5,
         point_font_thickness: int = 2
-) -> Dict[int, Dict[str, np.ndarray]], Tuple[np.ndarray, np.ndarray]:
+) -> Tuple[Dict[int, Dict[str, np.ndarray]], np.ndarray, np.ndarray]:
 
     frame_dir = Path(frame_dir)
     mask_dir = Path(mask_dir)
