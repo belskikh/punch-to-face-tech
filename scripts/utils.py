@@ -89,7 +89,9 @@ def sort_frame_func(filename: Path) -> int:
     return int(matching_numbers[0])
 
 
-def make_ordered_directory(directory: Union[str, Path]) -> None:
+def make_ordered_directory(
+        directory: Union[str, Path],
+        start_n: int = 0) -> None:
     res_dir = Path(directory)
     directory = Path(directory)
     millis = int(round(time.time() * 1000))
@@ -97,7 +99,7 @@ def make_ordered_directory(directory: Union[str, Path]) -> None:
     directory.replace(tmp_dir)
     res_dir.mkdir()
     files = sorted(tmp_dir.iterdir(), key=sort_frame_func)
-    file_n = 0
+    file_n = start_n
     for fn in files:
         if str.lower(fn.suffix) not in IMG_EXT:
             continue
