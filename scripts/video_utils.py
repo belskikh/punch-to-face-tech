@@ -75,7 +75,8 @@ class VideoInfo:
             name: str,
             frame_arr: List[Dict],
             scene_frame_ts_arr: List[Dict[str, int]],
-            video_fps_info: Dict) -> None:
+            video_fps_info: Dict,
+            min_age_scene: int = 1) -> None:
 
         # name of the video
         self.name = name
@@ -90,6 +91,7 @@ class VideoInfo:
         # convert json frame timestamps to List[int]
         self.scene_frame_ts = self.__init_scene_frame_ts(self.__scene_frame_ts_arr)
         # init video scenes
+        self.min_age_scene = min_age_scene
         self.scenes = self.__init_scenes()
 
         # save important video attributes
@@ -146,9 +148,9 @@ class VideoInfo:
                 video_scene = VideoScene(scene_id, first_frame, last_frame)
                 video_scenes.append(video_scene)
                 scene_id += 1
-            # check if it's one frame scene
+            # check if it's a short scene
             frame_diff = last_frame - first_frame
-            if frame_diff == 0:
+            if frame_diff == (self.min_age_scene - 1):
                 prev_video_scene = video_scene
             else:
                 prev_video_scene = None
@@ -191,12 +193,15 @@ class VideoInfo:
             cls,
             filename: Union[str, Path],
             scene_thresh: float = 0.2,
-            verbose: bool = True) -> 'VideoInfo':
+            min_age_scene: int = 1) -> 'VideoInfo':
         frame_arr = get_frames_info(filename)
         scene_frame_ts_arr = get_scene_frame_ts(filename, scene_thresh)
         video_fps_info = get_video_fps_info(filename)
         video_name = Path(filename).stem
-        return cls(video_name, frame_arr, scene_frame_ts_arr, video_fps_info)
+        return cls(
+            video_name, frame_arr, scene_frame_ts_arr,
+            video_fps_info, min_age_scene
+        )
 
     def get_name(self) -> str:
         return self.name
