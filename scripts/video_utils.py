@@ -68,7 +68,7 @@ class VideoScene:
     def show_first_last_frames(
             self,
             frame_dir: Union[str, Path],
-            fig_size: Tuple[float, float] = (10.0, 20.0)) -> None:
+            fig_size: Tuple[float, float] = (20.0, 10.0)) -> None:
 
         frame_dir = Path(frame_dir)
         # load first and last frames
