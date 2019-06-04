@@ -7,7 +7,7 @@ import shutil
 from pathlib import Path
 from typing import Dict, Tuple, List, Union
 
-from utils import IMG_EXT
+from utils import IMG_EXT, show_img
 
 
 class VideoFrame:
@@ -61,6 +61,22 @@ class VideoScene:
 
     def get_num_frames(self) -> int:
         return self.last_frame - self.first_frame + 1
+
+    def show_first_last_frames(
+            self,
+            frame_dir: Union[str, Path],
+            fig_size: Tuple[float, float] = (10.0, 20.0)) -> None:
+
+        frame_dir = Path(frame_dir)
+        # load first and last frames
+        frame_path = frame_dir / f'{self.get_first_frame()}.jpg'
+        first_frame = cv2.imread(str(frame_path), cv2.IMREAD_COLOR)
+        frame_path = frame_dir / f'{self.get_last_frame()}.jpg'
+        last_frame = cv2.imread(str(frame_path), cv2.IMREAD_COLOR)
+        # concatenate frames
+        first_last_frames = np.concatenate((first_frame, last_frame), axis=1)
+        # plot image
+        show_img(first_last_frames, fig_size=fig_size)
 
     def contains(self, frame_n: int):
         flag = frame_n >= self.first_frame
