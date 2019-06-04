@@ -141,7 +141,7 @@ class VideoInfo:
             else:
                 last_frame_pts = self.get_scene_frame_ts()[idx + 1]
                 last_frame = pts_to_frames[last_frame_pts] - 1
-            # if it was a one frame scene before
+            # if it was a short scene before
             if prev_video_scene is not None:
                 video_scene.last_frame = last_frame
             else:
@@ -150,7 +150,7 @@ class VideoInfo:
                 scene_id += 1
             # check if it's a short scene
             frame_diff = last_frame - first_frame
-            if frame_diff == (self.min_age_scene - 1):
+            if frame_diff < self.min_age_scene:
                 prev_video_scene = video_scene
             else:
                 prev_video_scene = None
