@@ -17,9 +17,9 @@ sys.path.insert(0, os.path.abspath('..'))
 
 from utils import make_overlay
 
-from transforms import get_canvas_inference_transforms, get_canvas_center_crop
-from data import CanvasInferenceDataset, get_canvas_inference_dataloader
-from models import AlbuNet
+from nn.transforms import get_canvas_inference_transforms, get_canvas_center_crop
+from nn.data import CanvasInferenceDataset, get_canvas_inference_dataloader
+from nn.models import AlbuNet
 
 
 # height and width should be from VideoInfo
