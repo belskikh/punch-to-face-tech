@@ -10,16 +10,16 @@ import torch
 
 import albumentations as albu
 
-from transforms import get_canvas_inference_transforms, get_canvas_center_crop
-from data import CanvasInferenceDataset, get_canvas_inference_dataloader
-from models import AlbuNet
-
 # dirty hack
 import sys
 import os
 sys.path.insert(0, os.path.abspath('..'))
 
 from utils import make_overlay
+
+from transforms import get_canvas_inference_transforms, get_canvas_center_crop
+from data import CanvasInferenceDataset, get_canvas_inference_dataloader
+from models import AlbuNet
 
 
 # height and width should be from VideoInfo

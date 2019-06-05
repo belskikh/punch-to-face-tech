@@ -1,5 +1,9 @@
 import albumentations as albu
 
+# dirty hack
+import sys
+import os
+sys.path.insert(0, os.path.abspath('..'))
 
 
 def get_canvas_inference_transforms(

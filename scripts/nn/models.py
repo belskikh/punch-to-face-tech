@@ -3,6 +3,11 @@ from torch import nn
 from torch.nn import functional as F
 import torchvision
 
+# dirty hack
+import sys
+import os
+sys.path.insert(0, os.path.abspath('..'))
+
 
 def conv3x3(in_, out):
     return nn.Conv2d(in_, out, 3, padding=1)
