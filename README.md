@@ -14,3 +14,6 @@ https://cloud.mail.ru/public/5FKM/5sgPe98Nz
 
 ### Canvas segmentation pretrained weights
 https://cloud.mail.ru/public/RNuC/zt3MfZbPx
+
+### Fight Nights Global 91 canvas texture
+https://cloud.mail.ru/public/2hnA/3YSq9ai73
