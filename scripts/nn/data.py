@@ -14,6 +14,7 @@ import os
 sys.path.insert(0, os.path.abspath('..'))
 
 from utils import IMG_EXT, num_cpus
+from video_utils import VideoScene
 
 
 class CanvasInferenceDataset(Dataset):
@@ -21,10 +22,13 @@ class CanvasInferenceDataset(Dataset):
     def __init__(
             self,
             frame_dir: Union[str, Path],
-            transforms: albu.Compose) -> None:
+            transforms: albu.Compose,
+            video_scene: VideoScene = None) -> None:
 
         frame_dir = Path(frame_dir)
-        files = [fn for fn in frame_dir.iterdir() if _check_frame_path(fn)]
+        files = [fn for fn in frame_dir.iterdir() if _check_frame_path(
+            fn, video_scene
+        )]
         files = sorted(files, key=_frame_sort_func)
 
         self.files = files
@@ -76,10 +80,16 @@ def _load_mask(path: Union[str, Path]) -> np.ndarray:
     return mask
 
 
-def _check_frame_path(fn: Path) -> bool:
+def _check_frame_path(fn: Path, video_scene: VideoScene = None) -> bool:
     flag = str.lower(fn.suffix) in IMG_EXT
-    flag = flag and fn.stem.isnumeric()
-    return flag
+
+    frame_n = fn.stem
+    flag = flag and frame_n.isnumeric()
+
+    if video_scene is None or not flag:
+        return flag
+    frame_n = int(frame_n)
+    return video_scene.contains(frame_n)
 
 
 def _frame_sort_func(fn: Path) -> int:

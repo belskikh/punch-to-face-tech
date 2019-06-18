@@ -16,6 +16,7 @@ import os
 sys.path.insert(0, os.path.abspath('..'))
 
 from utils import make_overlay
+from video_utils import VideoScene
 
 from nn.transforms import get_canvas_inference_transforms, get_canvas_center_crop
 from nn.data import CanvasInferenceDataset, get_canvas_inference_dataloader
@@ -34,7 +35,8 @@ def predict(
         divider: int = 32,
         extension: str = '.jpg',
         save_overlays: bool = True,
-        overlay_color: Tuple[int, int, int] = (89, 69, 15)) -> None:
+        overlay_color: Tuple[int, int, int] = (89, 69, 15),
+        video_scene: VideoScene = None) -> None:
 
     # create output directories
     output_dir = Path(output_dir)
@@ -57,7 +59,8 @@ def predict(
     # dataloader
     dataset = CanvasInferenceDataset(
         frame_dir=frame_dir,
-        transforms=transforms
+        transforms=transforms,
+        video_scene=video_scene
     )
     data_loader = get_canvas_inference_dataloader(
         dataset=dataset,
